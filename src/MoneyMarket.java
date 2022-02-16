@@ -1,2 +1,3 @@
-public class MoneyMarket {
+public class MoneyMarket extends Savings {
+
 }

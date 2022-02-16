@@ -1,2 +1,2 @@
-public class CollegeChecking {
+public class CollegeChecking extends Checking {
 }
