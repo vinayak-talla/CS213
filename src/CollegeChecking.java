@@ -7,6 +7,7 @@ public class CollegeChecking extends Checking {
     public double monthlyInterest() {
 
     }
+
     public double fee() {
         return 0;
     }
