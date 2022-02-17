@@ -4,6 +4,7 @@
  */
 public class Savings extends Account {
     private static final double YEARLYINTERESTRATE = 0.3;
+    private int customerLoyaty;
     public double monthlyInterest() {
         return (YEARLYINTERESTRATE/12) * balance;
     }
