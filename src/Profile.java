@@ -13,7 +13,7 @@ public class Profile {
         return this.fname + " " + this.lname + "DOB: " + this.dob.toString();
     }
 
-    public boolean equals(Profile profile){
+    public boolean equals(Profile profile){ // test this method
         if(this.fname.equals(profile.fname)){
             if(this.lname.equals(profile.lname)){
                 if(this.dob.compareTo(profile.dob) == 0){
