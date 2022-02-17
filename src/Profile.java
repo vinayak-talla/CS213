@@ -26,7 +26,7 @@ public class Profile {
      * @return Profile object formatted as a String
      */
     public String toString(){
-        return this.fname + " " + this.lname + "DOB: " + this.dob.toString();
+        return this.fname + " " + this.lname + " " + this.dob.toString();
     }
 
     public boolean equals(Profile profile){ // test this method

@@ -23,7 +23,7 @@ public abstract class Account {
 
     @Override
     public String toString(){
-        return holder + "::Balance $" + balance;
+        return getType() + "::" + holder + "::Balance $" + balance;
     }
 
     public void withdraw(double amount){
