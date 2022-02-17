@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Alvin Alex, Vinayak Talla
+ */
 public class AccountDatabase {
     private Account[] accounts;
     private int numAcct;
