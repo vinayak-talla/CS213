@@ -3,7 +3,7 @@
  * @author Alvin Alex, Vinayak Talla
  */
 public class Checking extends Account {
-    private static final double YEARLYINTERESTRATE = 0.1;
+    private static final double YEARLYINTERESTRATE = 0.001;
 
     public Checking(){
 

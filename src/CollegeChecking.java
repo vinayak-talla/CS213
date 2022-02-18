@@ -3,7 +3,7 @@
  * @author Alvin Alex, Vinayak Talla
  */
 public class CollegeChecking extends Checking {
-    private static final double YEARLYINTERESTRATE = 0.25;
+    private static final double YEARLYINTERESTRATE = 0.0025;
     private String campusCode;
 
     public CollegeChecking(Profile profile, double balance, int campusCode){
@@ -38,7 +38,7 @@ public class CollegeChecking extends Checking {
     }
 
     public static void main(String[] args){
-        CollegeChecking checking1 = new CollegeChecking(new Profile("Jane", "Doe", new Date("6/07/2002")), 0.0, 0);
+        CollegeChecking checking1 = new CollegeChecking(new Profile("Jane", "Doe", new Date("6/07/2002")), 0.0, 1);
         CollegeChecking checking2 = new CollegeChecking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 100.0, 0);
         System.out.println(checking1);
         System.out.println(checking2);
