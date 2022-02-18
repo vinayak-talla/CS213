@@ -8,6 +8,14 @@ public abstract class Account {
     protected boolean closed;
     protected double balance;
 
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
+
+    public void setBalance(double balance){
+        this.balance= balance;
+    }
+
     @Override
     public boolean equals(Object obj){
         if(!(obj instanceof Account))
@@ -26,7 +34,7 @@ public abstract class Account {
         return getType() + "::" + holder + "::Balance $" + balance;
     }
 
-    public void withdraw(double amount){
+    public void withdraw(double amount) {
         this.balance = this.balance - amount;
 
     }

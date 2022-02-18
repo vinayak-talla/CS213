@@ -4,7 +4,7 @@
  */
 public class Savings extends Account {
     private static double yearlyInterestRate;
-    private int customerLoyalty;
+    private boolean isLoyal;
 
     public double monthlyInterest() {
         return (yearlyInterestRate/12) * balance;
@@ -17,12 +17,17 @@ public class Savings extends Account {
     public Savings(Profile profile, double balance, int customerLoyalty){
         this.holder = profile;
         this.balance = balance;
-        this.customerLoyalty = customerLoyalty;
         this.closed = false;
-        if(customerLoyalty == 0){
+        if(customerLoyalty == 0) {
+            isLoyal = false;
+        }
+        else {
+            isLoyal = true;
+        }
+        if(!isLoyal){
             yearlyInterestRate = .003;
         }
-        else if(customerLoyalty == 1){
+        else {
             yearlyInterestRate = 0.0045;
         }
     }
@@ -40,14 +45,28 @@ public class Savings extends Account {
         return "Savings";
     }
 
-    public String toString(){
-        if(customerLoyalty == 0){
-            return getType() + "::" + holder + "::Balance $" + balance;
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+
+        if(closed) {
+            isLoyal = false;
         }
-        else if(customerLoyalty == 1){
+    }
+
+
+    public String toString(){
+
+        String closedString = "";
+        if(this.closed){
+            closedString = "::CLOSED";
+        }
+
+        if(isLoyal) {
             return getType() + "::" + holder + "::Balance $" + balance + "::Loyal";
         }
-        return "NOT_FOUND";
+        else {
+            return getType() + "::" + holder + "::Balance $" + balance + closedString;
+        }
     }
 
     public static void main(String[] args){

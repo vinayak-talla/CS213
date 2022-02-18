@@ -3,24 +3,26 @@
  * @author Alvin Alex, Vinayak Talla
  */
 public class MoneyMarket extends Savings {
-    private int customerLoyalty;
     private double yearlyInterestRate;
     private int numOfWithdrawals = 0;
-    private String loyal = "";
-    private String closedString = "";
+    private boolean isLoyal;
 
     public MoneyMarket(Profile profile, double balance){
         this.holder = profile;
         this.balance = balance;
-        this.customerLoyalty = 1;
+        this.isLoyal = true;
         yearlyInterestRate = 0.0095;
         this.closed = false;
+    }
+
+    public void setLoyal(boolean loyal){
+        this.isLoyal = loyal;
     }
 
     public void withdraw(double amount){
         this.balance = this.balance - amount;
         if(this.balance < 2500.0){
-            this.customerLoyalty = 0;
+            this.isLoyal = false;
             yearlyInterestRate = 0.008;
         }
         numOfWithdrawals ++;
@@ -39,15 +41,26 @@ public class MoneyMarket extends Savings {
         }
     }
 
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+
+        if(closed) {
+            isLoyal = false;
+        }
+    }
+
     public String getType() {
         return "Money Market";
     }
 
     public String toString(){
-        if(customerLoyalty == 1){
+        String loyal = "";
+        String closedString = "";
+        if(this.isLoyal){
+            System.out.println("running");
             loyal = "::Loyal";
         }
-        if(closed){
+        if(this.closed){
             closedString = "::CLOSED";
         }
         return getType() + "::" + holder + "::Balance $" + balance + loyal + closedString + "::withdrawl: " + numOfWithdrawals;
@@ -59,6 +72,7 @@ public class MoneyMarket extends Savings {
         System.out.println(moneyMarket1);
         System.out.println(moneyMarket2);
         moneyMarket2.withdraw(200);
+
         System.out.println(moneyMarket2);
     }
 }

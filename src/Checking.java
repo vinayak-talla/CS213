@@ -8,11 +8,13 @@ public class Checking extends Account {
     public Checking(){
 
     }
+
     public Checking(Profile profile, double balance){
         this.holder = profile;
         this.balance = balance;
         this.closed = false;
     }
+
     public double monthlyInterest() {
         return (YEARLYINTERESTRATE/12) * balance;
     }
