@@ -115,8 +115,8 @@ public class AccountDatabase {
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
         System.out.println("*list of accounts with updated balance");
         for(int i = 0; i < numAcct; i++){
-            accounts[i].deposit(accounts[i].monthlyInterest()); // balance is now a really long decimal need to fix that
-            accounts[i].withdraw(accounts[i].fee()); // best way of fixing it is to cast monthly interest to a 2 digit decimal when making calculations
+            accounts[i].deposit(accounts[i].monthlyInterest()); 
+            accounts[i].withdraw(accounts[i].fee());
             System.out.println(accounts[i]);
         }
         System.out.println("*end of list.");
