@@ -107,7 +107,13 @@ public class AccountDatabase {
     }
 
     public static void main(String[] args){
-
+        AccountDatabase accountDB = new AccountDatabase();
+        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 950));
+        accountDB.open(new Checking(new Profile("John", "Doe", new Date("2/19/1990")), 1766));
+        accountDB.open(new CollegeChecking(new Profile("John", "Doe", new Date("7/06/2002")), 300));
+        accountDB.open(new Checking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 300));
+        accountDB.open(new Checking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 300));
+        accountDB.open(new Checking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 300));
     }
 
 }
