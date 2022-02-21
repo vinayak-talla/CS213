@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 /**
  *
  * @author Alvin Alex, Vinayak Talla
@@ -54,7 +55,7 @@ public class AccountDatabase {
 
         return true;
     }
-
+/*
     public void deposit(Account account){
 
 
@@ -63,7 +64,7 @@ public class AccountDatabase {
     public boolean withdraw(Account account){
 
     }
-
+*/
     public void print(){
         for(int i = 0; i < numAcct; i++) {
             System.out.println(accounts[i]);
@@ -101,19 +102,36 @@ public class AccountDatabase {
     }
 
     public void printFeeAndInterest(){
+        DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
+        System.out.println("*list of accounts with fee and monthly interest");
         for(int i = 0; i < numAcct; i++){
-            System.out.println(accounts[i] + "::fee $" + accounts[i].fee() + "::monthly interest $" + accounts[i].monthlyInterest());
+            System.out.println(accounts[i] + "::fee " + d.format(accounts[i].fee()) + "::monthly interest " + d.format(accounts[i].monthlyInterest()));
         }
+        System.out.println("*end of list.");
+        System.out.println();
+    }
+
+    public void updateFeesAndInterest(){
+        DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
+        System.out.println("*list of accounts with updated balance");
+        for(int i = 0; i < numAcct; i++){
+            accounts[i].deposit(accounts[i].monthlyInterest()); // balance is now a really long decimal need to fix that
+            accounts[i].withdraw(accounts[i].fee()); // best way of fixing it is to cast monthly interest to a 2 digit decimal when making calculations
+            System.out.println(accounts[i]);
+        }
+        System.out.println("*end of list.");
     }
 
     public static void main(String[] args){
         AccountDatabase accountDB = new AccountDatabase();
         accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 950));
         accountDB.open(new Checking(new Profile("John", "Doe", new Date("2/19/1990")), 1766));
-        accountDB.open(new CollegeChecking(new Profile("John", "Doe", new Date("7/06/2002")), 300));
-        accountDB.open(new Checking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 300));
-        accountDB.open(new Checking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 300));
-        accountDB.open(new Checking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 300));
+        accountDB.open(new CollegeChecking(new Profile("John", "Doe", new Date("2/19/1989")), 500.0, 0));
+        accountDB.open(new CollegeChecking(new Profile("Chris", "Young", new Date("9/20/2001")), 500, 0));
+        accountDB.printFeeAndInterest();
+        accountDB.updateFeesAndInterest();
+
+
     }
 
 }

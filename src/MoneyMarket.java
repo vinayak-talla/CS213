@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 /**
  *
  * @author Alvin Alex, Vinayak Talla
@@ -29,7 +30,8 @@ public class MoneyMarket extends Savings {
     }
 
     public double monthlyInterest() {
-        return (yearlyInterestRate/12) * balance;
+        DecimalFormat d = new DecimalFormat("#.##");
+        return Double.parseDouble(d.format((yearlyInterestRate/12) * balance));
     }
 
     public double fee() {
@@ -54,6 +56,7 @@ public class MoneyMarket extends Savings {
     }
 
     public String toString(){
+        DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
         String loyal = "";
         String closedString = "";
         if(this.isLoyal){
@@ -63,7 +66,7 @@ public class MoneyMarket extends Savings {
         if(this.closed){
             closedString = "::CLOSED";
         }
-        return getType() + "::" + holder + "::Balance $" + balance + loyal + closedString + "::withdrawl: " + numOfWithdrawals;
+        return getType() + "::" + holder + "::Balance " + d.format(balance) + loyal + closedString + "::withdrawl: " + numOfWithdrawals;
     }
 
     public static void main(String[] args){

@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 /**
  *
  * @author Alvin Alex, Vinayak Talla
@@ -22,7 +23,8 @@ public class CollegeChecking extends Checking {
     }
 
     public double monthlyInterest() {
-        return (YEARLYINTERESTRATE/12) * balance;
+        DecimalFormat d = new DecimalFormat("#.##");
+        return Double.parseDouble(d.format((YEARLYINTERESTRATE/12) * balance));
     }
 
     public double fee() {
@@ -30,7 +32,8 @@ public class CollegeChecking extends Checking {
     }
 
     public String toString(){
-        return getType() + "::" + holder + "::Balance $" + balance + "::" + campusCode;
+        DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
+        return getType() + "::" + holder + "::Balance " + d.format(balance) + "::" + campusCode;
     }
 
     public String getType() {
@@ -42,5 +45,6 @@ public class CollegeChecking extends Checking {
         CollegeChecking checking2 = new CollegeChecking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 100.0, 0);
         System.out.println(checking1);
         System.out.println(checking2);
+
     }
 }

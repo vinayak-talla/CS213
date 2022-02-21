@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 /**
  *
  * @author Alvin Alex, Vinayak Talla
@@ -16,7 +17,8 @@ public class Checking extends Account {
     }
 
     public double monthlyInterest() {
-        return (YEARLYINTERESTRATE/12) * balance;
+        DecimalFormat d = new DecimalFormat("#.##");
+        return Double.parseDouble(d.format((YEARLYINTERESTRATE/12) * balance));
     }
 
     public double fee() {

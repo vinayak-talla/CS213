@@ -1,4 +1,4 @@
-
+import java.text.DecimalFormat;
 /**
  *
  * @author Alvin Alex, Vinayak Talla
@@ -31,7 +31,8 @@ public abstract class Account {
 
     @Override
     public String toString(){
-        return getType() + "::" + holder + "::Balance $" + balance;
+        DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
+        return getType() + "::" + holder + "::Balance " + d.format(balance);
     }
 
     public void withdraw(double amount) {

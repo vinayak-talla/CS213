@@ -38,7 +38,7 @@ public class BankTeller {
                 accountDatabase.printFeeAndInterest();
             }
             else if(tokens[0].equals("UB")){
-
+                accountDatabase.updateFeesAndInterest();
             }
             else if(tokens[0].equals("Q")) {
                 break;

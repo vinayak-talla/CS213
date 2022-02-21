@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 /**
  *
  * @author Alvin Alex, Vinayak Talla
@@ -7,7 +8,8 @@ public class Savings extends Account {
     private boolean isLoyal;
 
     public double monthlyInterest() {
-        return (yearlyInterestRate/12) * balance;
+        DecimalFormat d = new DecimalFormat("#.##");
+        return Double.parseDouble(d.format((yearlyInterestRate/12) * balance));
     }
 
     public Savings(){
@@ -55,17 +57,17 @@ public class Savings extends Account {
 
 
     public String toString(){
-
+        DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
         String closedString = "";
         if(this.closed){
             closedString = "::CLOSED";
         }
 
         if(isLoyal) {
-            return getType() + "::" + holder + "::Balance $" + balance + "::Loyal";
+            return getType() + "::" + holder + "::Balance " + d.format(balance) + "::Loyal";
         }
         else {
-            return getType() + "::" + holder + "::Balance $" + balance + closedString;
+            return getType() + "::" + holder + "::Balance " + d.format(balance) + closedString;
         }
     }
 
@@ -74,5 +76,6 @@ public class Savings extends Account {
         Savings savings2 = new Savings(new Profile("Alvin", "Alex", new Date("7/06/2002")), 100.0, 0);
         System.out.println(savings1);
         System.out.println(savings2);
+
     }
 }
