@@ -5,6 +5,20 @@ import java.util.Scanner;
  * @author Alvin Alex, Vinayak Talla
  */
 public class BankTeller {
+    public void openAccounts(String[] tokens, AccountDatabase accountDatabase){
+        if(tokens[1].equals("C")){
+            accountDatabase.open(new Checking(new Profile(tokens[2], tokens[3]), new Date(tokens[4])), Double.parseDouble(tokens[5]))
+        }
+        else if(tokens[1].equals("CC")){
+
+        }
+        else if(tokens[1].equals("S")){
+
+        }
+        else if(tokens[1].equals("MM")){
+
+        }
+    }
 
     public void run(){
         Scanner scanner = new Scanner(System.in);
@@ -15,10 +29,9 @@ public class BankTeller {
             Account[] tempAccts = accountDatabase.getAccounts();
             int numAccts = accountDatabase.getNumAcct();
             if(tokens[0].equals("O")){
-                validAppointment(schedule, tempAppts, numAppts, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
+                accountDatabase.open(schedule, tempAppts, numAppts, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
             }
             else if(tokens[0].equals("C")){
-                Location location = findLocation(tokens[6]);
                 removeAppointment(schedule, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
             }
             else if(tokens[0].equals("D")){
