@@ -23,7 +23,7 @@ public abstract class Account {
 
         Account acc = (Account) obj;
 
-        if(this.holder.equals(acc.holder) && this.getType().equals(acc.getType())) { // getClass is not allowed
+        if(this.holder.equals(acc.holder) && this.getType().equals(acc.getType())) {
             return true;
         }
         return false;

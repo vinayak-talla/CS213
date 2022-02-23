@@ -63,14 +63,14 @@ public class AccountDatabase {
         return true;
     }
 
-//    public void deposit(Account account){
-//
-//
-//    }
-//
-//    public boolean withdraw(Account account){
-//
-//    }
+    public void deposit(Account account){
+        accounts[find(account)].deposit(account.balance);
+    }
+
+    public boolean withdraw(Account account){
+        accounts[find(account)].withdraw(account.balance);
+        return true;
+    }
 
     public void print(){
         System.out.println("*list of accounts in the database*");

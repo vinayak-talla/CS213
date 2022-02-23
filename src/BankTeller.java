@@ -35,6 +35,36 @@ public class BankTeller {
         }
     }
 
+    public void depositAccounts(String[] tokens, AccountDatabase accountDatabase){
+        if(tokens[1].equals("C")){
+            accountDatabase.deposit(new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5])));
+        }
+        else if(tokens[1].equals("CC")){
+            accountDatabase.deposit(new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0));
+        }
+        else if(tokens[1].equals("S")){
+            accountDatabase.deposit(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0));
+        }
+        else if(tokens[1].equals("MM")){
+            accountDatabase.deposit(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5])));
+        }
+    }
+
+    public void withdrawAccounts(String[] tokens, AccountDatabase accountDatabase){
+        if(tokens[1].equals("C")){
+            accountDatabase.withdraw(new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5])));
+        }
+        else if(tokens[1].equals("CC")){
+            accountDatabase.withdraw(new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0));
+        }
+        else if(tokens[1].equals("S")){
+            accountDatabase.withdraw(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0));
+        }
+        else if(tokens[1].equals("MM")){
+            accountDatabase.withdraw(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5])));
+        }
+    }
+
 
 
     public void run(){
@@ -53,11 +83,10 @@ public class BankTeller {
                 closeAccounts(tokens, accountDatabase);
             }
             else if(tokens[0].equals("D")){
-                //tempAppts = schedule.getAppointments();
-                //cancelPatientAppts(schedule,tempAppts, numAppts, new Patient(tokens[2], tokens[3], new Date(tokens[1])));
+                depositAccounts(tokens,accountDatabase);
             }
             else if(tokens[0].equals("W")){
-
+                withdrawAccounts(tokens,accountDatabase);
             }
             else if(tokens[0].equals("P")){
                 accountDatabase.print();
