@@ -7,18 +7,35 @@ import java.util.Scanner;
 public class BankTeller {
     public void openAccounts(String[] tokens, AccountDatabase accountDatabase){
         if(tokens[1].equals("C")){
-            accountDatabase.open(new Checking(new Profile(tokens[2], tokens[3]), new Date(tokens[4])), Double.parseDouble(tokens[5]))
+            accountDatabase.open(new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5])));
         }
         else if(tokens[1].equals("CC")){
-
+            accountDatabase.open(new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6])));
         }
         else if(tokens[1].equals("S")){
-
+            accountDatabase.open(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6])));
         }
         else if(tokens[1].equals("MM")){
-
+            accountDatabase.open(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5])));
         }
     }
+
+    public void closeAccounts(String[] tokens, AccountDatabase accountDatabase){
+        if(tokens[1].equals("C")){
+            accountDatabase.close(new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0));
+        }
+        else if(tokens[1].equals("CC")){
+            accountDatabase.close(new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0, 0));
+        }
+        else if(tokens[1].equals("S")){
+            accountDatabase.close(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0, 0));
+        }
+        else if(tokens[1].equals("MM")){
+            accountDatabase.close(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0));
+        }
+    }
+
+
 
     public void run(){
         Scanner scanner = new Scanner(System.in);
@@ -29,14 +46,15 @@ public class BankTeller {
             Account[] tempAccts = accountDatabase.getAccounts();
             int numAccts = accountDatabase.getNumAcct();
             if(tokens[0].equals("O")){
-                accountDatabase.open(schedule, tempAppts, numAppts, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
+                openAccounts(tokens, accountDatabase);
             }
             else if(tokens[0].equals("C")){
-                removeAppointment(schedule, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
+                //removeAppointment(schedule, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
+                closeAccounts(tokens, accountDatabase);
             }
             else if(tokens[0].equals("D")){
-                tempAppts = schedule.getAppointments();
-                cancelPatientAppts(schedule,tempAppts, numAppts, new Patient(tokens[2], tokens[3], new Date(tokens[1])));
+                //tempAppts = schedule.getAppointments();
+                //cancelPatientAppts(schedule,tempAppts, numAppts, new Patient(tokens[2], tokens[3], new Date(tokens[1])));
             }
             else if(tokens[0].equals("W")){
 

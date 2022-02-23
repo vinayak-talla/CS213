@@ -33,7 +33,11 @@ public class CollegeChecking extends Checking {
 
     public String toString(){
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
-        return getType() + "::" + holder + "::Balance " + d.format(balance) + "::" + campusCode;
+        String closedString = "";
+        if(this.closed){
+            closedString = "::CLOSED";
+        }
+        return getType() + "::" + holder + "::Balance " + d.format(balance) + "::" + campusCode + closedString;
     }
 
     public String getType() {

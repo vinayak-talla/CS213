@@ -23,7 +23,7 @@ public abstract class Account {
 
         Account acc = (Account) obj;
 
-        if(this.holder.equals(acc.holder)) {
+        if(this.holder.equals(acc.holder) && this.getType().equals(acc.getType())) { // getClass is not allowed
             return true;
         }
         return false;
@@ -32,10 +32,17 @@ public abstract class Account {
     @Override
     public String toString(){
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
-        return getType() + "::" + holder + "::Balance " + d.format(balance);
+        String closedString = "";
+        if(this.closed){
+            closedString = "::CLOSED";
+        }
+        return getType() + "::" + holder + "::Balance " + d.format(balance) + closedString;
     }
 
     public void withdraw(double amount) {
+        if((this.balance - amount) <= 0){
+            return; // have to figure out a way to display the error
+        }
         this.balance = this.balance - amount;
 
     }

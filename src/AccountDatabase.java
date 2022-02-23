@@ -43,32 +43,41 @@ public class AccountDatabase {
         if(numAcct == accounts.length-1){
             grow();
         }
-        accounts[numAcct] = account;
-        numAcct++;
+        if(find(account) == NOT_FOUND){
+            accounts[numAcct] = account;
+            numAcct++;
+        }
+        else{
+            accounts[find(account)].setClosed(false);
+            accounts[find(account)].setBalance(account.balance);
+        }
         return true;
 
     }
 
     public boolean close(Account account){
-        account.setClosed(true);
-        account.setBalance(0);
+        int indexOfAccount = find(account);
+        accounts[indexOfAccount].setClosed(true);
+        accounts[indexOfAccount].setBalance(0);
 
         return true;
     }
-/*
-    public void deposit(Account account){
 
+//    public void deposit(Account account){
+//
+//
+//    }
+//
+//    public boolean withdraw(Account account){
+//
+//    }
 
-    }
-
-    public boolean withdraw(Account account){
-
-    }
-*/
     public void print(){
+        System.out.println("*list of accounts in the database*");
         for(int i = 0; i < numAcct; i++) {
             System.out.println(accounts[i]);
         }
+        System.out.println("*end of list*");
 
     }
 
@@ -120,6 +129,7 @@ public class AccountDatabase {
             System.out.println(accounts[i]);
         }
         System.out.println("*end of list.");
+        System.out.println();
     }
 
     public static void main(String[] args){
@@ -130,7 +140,10 @@ public class AccountDatabase {
         accountDB.open(new CollegeChecking(new Profile("Chris", "Young", new Date("9/20/2001")), 500, 0));
         accountDB.printFeeAndInterest();
         accountDB.updateFeesAndInterest();
-
+        accountDB.close(new Checking(new Profile("April", "March", new Date("1/15/1987")), 0));
+        accountDB.print();
+        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 200));
+        accountDB.print();
 
     }
 

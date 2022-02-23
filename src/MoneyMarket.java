@@ -60,7 +60,6 @@ public class MoneyMarket extends Savings {
         String loyal = "";
         String closedString = "";
         if(this.isLoyal){
-            System.out.println("running");
             loyal = "::Loyal";
         }
         if(this.closed){
