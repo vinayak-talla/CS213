@@ -17,12 +17,19 @@ public class BankTeller {
                 Checking checking1 = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 Profile profile1 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(checking1)){
+<<<<<<< Updated upstream:src/project2/BankTeller.java
                    System.out.println("project2.Account opened");
+=======
+                   System.out.println("Account opened.");
+>>>>>>> Stashed changes:src/BankTeller.java
                 }
                 else if(checking1.getType().equals("College project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("project2.Checking")){
                     System.out.println(profile1 + " same account(type) is in the database");
                 }
                 else if(checking1.getType().equals("project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("College project2.Checking")){
+                    System.out.println(profile1 + " same account(type) is in the database");
+                }
+                else if(checking1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType())){
                     System.out.println(profile1 + " same account(type) is in the database");
                 }
                 else{
@@ -33,7 +40,11 @@ public class BankTeller {
                 CollegeChecking checking2 = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
                 Profile profile2 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(checking2)){
+<<<<<<< Updated upstream:src/project2/BankTeller.java
                     System.out.println("project2.Account opened");
+=======
+                    System.out.println("Account opened.");
+>>>>>>> Stashed changes:src/BankTeller.java
                 }
                 else if(checking2.getType().equals("College project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("project2.Checking")){
                     System.out.println(profile2 + " same account(type) is in the database");
@@ -41,33 +52,61 @@ public class BankTeller {
                 else if(checking2.getType().equals("project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("College project2.Checking")){
                     System.out.println(profile2 + " same account(type) is in the database");
                 }
+                else if(checking2.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType())){
+                    System.out.println(profile2 + " same account(type) is in the database");
+                }
                 else{
+<<<<<<< Updated upstream:src/project2/BankTeller.java
                     System.out.println("project2.Account reopened");
+=======
+                    System.out.println("Account reopened.");
+>>>>>>> Stashed changes:src/BankTeller.java
                 }
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
+                Savings savings1 = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
+                Profile profile3 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6])))){
+<<<<<<< Updated upstream:src/project2/BankTeller.java
                     System.out.println("project2.Account opened");
                 }
                 else{
                     System.out.println("project2.Account reopened");
+=======
+                    System.out.println("Account opened.");
+                }
+                else if(savings1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), savings1 ,accountDatabase.getNumAcct())].getType())){
+                    System.out.println(profile3 + " same account(type) is in the database");
+                }
+                else{
+                    System.out.println("Account reopened.");
+>>>>>>> Stashed changes:src/BankTeller.java
                 }
             }
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5])) && validMM(Double.parseDouble(tokens[5]))) {
+                MoneyMarket moneyMarket1 = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
+                Profile profile4 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5])))){
                     System.out.println("project2.Account opened");
                 }
+                else if(moneyMarket1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), moneyMarket1 ,accountDatabase.getNumAcct())].getType())){
+                    System.out.println(profile4 + " same account(type) is in the database");
+                }
                 else{
+<<<<<<< Updated upstream:src/project2/BankTeller.java
                     System.out.println("project2.Account reopened");
+=======
+                    System.out.println("Account reopened.");
+>>>>>>> Stashed changes:src/BankTeller.java
                 }
 
             }
         }
         catch (IndexOutOfBoundsException ex) {
-            System.out.println("Missing data for opening account");
+            System.out.println("Missing data for opening an account.");
         }
         catch (NumberFormatException ex) {
-            System.out.println("Invalid amount");
+            System.out.println("Not a valid amount.");
         }
 
     }
@@ -99,15 +138,15 @@ public class BankTeller {
     private boolean validAmount(String command, Double amount) {
         if(amount <= 0){
             if(command.equals("O")) {
-                System.out.println("Initial deposit cannot be 0 or negative");
+                System.out.println("Initial deposit cannot be 0 or negative.");
                 return false;
             }
             if(command.equals("D")) {
-                System.out.println("Deposit - amount cannot be 0 or negative");
+                System.out.println("Deposit - amount cannot be 0 or negative.");
                 return false;
             }
             if(command.equals("W")) {
-                System.out.println("Withdraw - amount cannot be 0 or negative");
+                System.out.println("Withdraw - amount cannot be 0 or negative.");
                 return false;
             }
         }
@@ -145,10 +184,10 @@ public class BankTeller {
         }
 
         catch (IndexOutOfBoundsException ex) {
-            System.out.println("Missing data for closing an account");
+            System.out.println("Missing data for closing an account.");
         }
         catch (NumberFormatException ex) {
-            System.out.println("Invalid amount");
+            System.out.println("Not a valid amount.");
         }
     }
 
@@ -206,7 +245,7 @@ public class BankTeller {
             System.out.println("Missing data for depositing into account");
         }
         catch (NumberFormatException ex) {
-            System.out.println("Invalid amount");
+            System.out.println("Not a valid amount.");
         }
     }
 
@@ -258,7 +297,7 @@ public class BankTeller {
             System.out.println("Missing data for withdrawing from account");
         }
         catch (NumberFormatException ex) {
-            System.out.println("Invalid amount");
+            System.out.println("Not a valid amount.");
         }
     }
 

@@ -48,6 +48,7 @@ public abstract class Account {
 
         Account acc = (Account) obj;
 
+<<<<<<< Updated upstream:src/project2/Account.java
         if(this.holder.equals(acc.holder) && this.getType().equals(acc.getType())) {
             return true;
         }
@@ -55,8 +56,17 @@ public abstract class Account {
             return true;
         }
         else if(this.holder.equals(acc.holder) && this.getType().equals("project2.Checking") && acc.getType().equals("College project2.Checking")){
+=======
+        if(this.holder.equals(acc.holder) /*&& this.getType().equals(acc.getType())*/) {
+>>>>>>> Stashed changes:src/Account.java
             return true;
         }
+//        else if(this.holder.equals(acc.holder) && this.getType().equals("College Checking") && acc.getType().equals("Checking")){
+//            return true;
+//        }
+//        else if(this.holder.equals(acc.holder) && this.getType().equals("Checking") && acc.getType().equals("College Checking")){
+//            return true;
+//        }
         return false;
     }
 
