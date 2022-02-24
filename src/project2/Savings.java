@@ -1,5 +1,4 @@
 package project2;
-
 import java.text.DecimalFormat;
 /**
  *
@@ -10,10 +9,6 @@ import java.text.DecimalFormat;
 public class Savings extends Account {
     private static double yearlyInterestRate;
     private boolean isLoyal;
-
-
-
-
     public Savings() {
 
     }
