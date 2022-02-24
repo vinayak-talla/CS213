@@ -51,7 +51,10 @@ public class AccountDatabase {
             return true;
         }
         else{
-            if((accounts[find(account)].getType().equals("College project2.Checking") && account.getType().equals("project2.Checking")) || (accounts[find(account)].getType().equals("College project2.Checking") && account.getType().equals("project2.Checking"))){
+            if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("College project2.Checking") && account.getType().equals("project2.Checking"))){
+                return false;
+            }
+            if(accounts[find(account)].getType().equals(account.getType())){
                 return false;
             }
             accounts[find(account)].setClosed(false);

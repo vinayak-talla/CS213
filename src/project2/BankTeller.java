@@ -17,13 +17,9 @@ public class BankTeller {
                 Checking checking1 = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 Profile profile1 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(checking1)){
-<<<<<<< Updated upstream:src/project2/BankTeller.java
-                   System.out.println("project2.Account opened");
-=======
                    System.out.println("Account opened.");
->>>>>>> Stashed changes:src/BankTeller.java
                 }
-                else if(checking1.getType().equals("College project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("project2.Checking")){
+                else if(checking1.getType().equals("College Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("project2.Checking")){
                     System.out.println(profile1 + " same account(type) is in the database");
                 }
                 else if(checking1.getType().equals("project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("College project2.Checking")){
@@ -40,11 +36,7 @@ public class BankTeller {
                 CollegeChecking checking2 = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
                 Profile profile2 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(checking2)){
-<<<<<<< Updated upstream:src/project2/BankTeller.java
-                    System.out.println("project2.Account opened");
-=======
                     System.out.println("Account opened.");
->>>>>>> Stashed changes:src/BankTeller.java
                 }
                 else if(checking2.getType().equals("College project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("project2.Checking")){
                     System.out.println(profile2 + " same account(type) is in the database");
@@ -56,31 +48,20 @@ public class BankTeller {
                     System.out.println(profile2 + " same account(type) is in the database");
                 }
                 else{
-<<<<<<< Updated upstream:src/project2/BankTeller.java
-                    System.out.println("project2.Account reopened");
-=======
                     System.out.println("Account reopened.");
->>>>>>> Stashed changes:src/BankTeller.java
                 }
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
                 Savings savings1 = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
                 Profile profile3 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6])))){
-<<<<<<< Updated upstream:src/project2/BankTeller.java
-                    System.out.println("project2.Account opened");
-                }
-                else{
-                    System.out.println("project2.Account reopened");
-=======
-                    System.out.println("Account opened.");
+                    System.out.println("Account opened");
                 }
                 else if(savings1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), savings1 ,accountDatabase.getNumAcct())].getType())){
                     System.out.println(profile3 + " same account(type) is in the database");
                 }
                 else{
                     System.out.println("Account reopened.");
->>>>>>> Stashed changes:src/BankTeller.java
                 }
             }
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5])) && validMM(Double.parseDouble(tokens[5]))) {
@@ -93,11 +74,7 @@ public class BankTeller {
                     System.out.println(profile4 + " same account(type) is in the database");
                 }
                 else{
-<<<<<<< Updated upstream:src/project2/BankTeller.java
-                    System.out.println("project2.Account reopened");
-=======
                     System.out.println("Account reopened.");
->>>>>>> Stashed changes:src/BankTeller.java
                 }
 
             }
