@@ -12,6 +12,10 @@ public abstract class Account {
         this.closed = closed;
     }
 
+    public boolean getClosed() {
+        return this.closed;
+    }
+
     public void setBalance(double balance){
         this.balance= balance;
     }
@@ -24,6 +28,12 @@ public abstract class Account {
         Account acc = (Account) obj;
 
         if(this.holder.equals(acc.holder) && this.getType().equals(acc.getType())) {
+            return true;
+        }
+        else if(this.holder.equals(acc.holder) && this.getType().equals("College Checking") && acc.getType().equals("Checking")){
+            return true;
+        }
+        else if(this.holder.equals(acc.holder) && this.getType().equals("Checking") && acc.getType().equals("College Checking")){
             return true;
         }
         return false;
@@ -40,11 +50,7 @@ public abstract class Account {
     }
 
     public void withdraw(double amount) {
-        if((this.balance - amount) <= 0){
-            return; // have to figure out a way to display the error
-        }
         this.balance = this.balance - amount;
-
     }
 
     public void deposit(double amount){

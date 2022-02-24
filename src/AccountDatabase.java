@@ -46,17 +46,23 @@ public class AccountDatabase {
         if(find(account) == NOT_FOUND){
             accounts[numAcct] = account;
             numAcct++;
+            return true;
         }
         else{
+            if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking"))){
+                return false;
+            }
             accounts[find(account)].setClosed(false);
             accounts[find(account)].setBalance(account.balance);
+            return false;
         }
-        return true;
-
     }
 
     public boolean close(Account account){
         int indexOfAccount = find(account);
+        if(accounts[indexOfAccount].getClosed()) {
+            return false;
+        }
         accounts[indexOfAccount].setClosed(true);
         accounts[indexOfAccount].setBalance(0);
 
@@ -68,8 +74,13 @@ public class AccountDatabase {
     }
 
     public boolean withdraw(Account account){
-        accounts[find(account)].withdraw(account.balance);
-        return true;
+        if(accounts[find(account)].balance - account.balance <= 0){
+            return false;
+        }
+        else {
+            accounts[find(account)].withdraw(account.balance);
+            return true;
+        }
     }
 
     public void print(){
