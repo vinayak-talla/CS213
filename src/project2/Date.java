@@ -1,3 +1,5 @@
+package project2;
+
 import java.util.StringTokenizer;
 import java.util.Calendar;
 
@@ -73,7 +75,7 @@ public class Date implements Comparable<Date>{
     }
 
     /**
-     * Method that determines if the appt project1.Date entered is more than one year from now
+     * Method that determines if the appt Date entered is more than one year from now
      * @return boolean value that is whether the appt Date entered is more than one year from now
      */
     public boolean isFutureApptDate(){
@@ -183,7 +185,7 @@ public class Date implements Comparable<Date>{
 
     /**
      * Method to print out Date object
-     * @return Date object formatted as a string
+     * @return project2.Date object formatted as a string
      */
     public String toString(){
         return this.month + "/" + this.day + "/" + this.year;

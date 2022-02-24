@@ -1,3 +1,5 @@
+package project2;
+
 import java.text.DecimalFormat;
 /**
  *
@@ -49,7 +51,7 @@ public class AccountDatabase {
             return true;
         }
         else{
-            if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking"))){
+            if((accounts[find(account)].getType().equals("College project2.Checking") && account.getType().equals("project2.Checking")) || (accounts[find(account)].getType().equals("College project2.Checking") && account.getType().equals("project2.Checking"))){
                 return false;
             }
             accounts[find(account)].setClosed(false);

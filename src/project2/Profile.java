@@ -1,3 +1,5 @@
+package project2;
+
 /**
  *
  * @author Alvin Alex, Vinayak Talla
@@ -10,7 +12,7 @@ public class Profile {
     private Date dob;
 
     /**
-     * Constructor for Profile that initializes Patient object with first name, last name, and date of birth
+     * Constructor for Profile that initializes Profile object with first name, last name, and date of birth
      * @param fname the first name for the profile
      * @param lname the last name for the profile
      * @param dob the date of birth of the person

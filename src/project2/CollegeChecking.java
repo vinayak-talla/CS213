@@ -1,3 +1,5 @@
+package project2;
+
 import java.text.DecimalFormat;
 /**
  *
@@ -41,7 +43,7 @@ public class CollegeChecking extends Checking {
     }
 
     public String getType() {
-        return "College Checking";
+        return "College project2.Checking";
     }
 
     public static void main(String[] args){
