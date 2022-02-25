@@ -47,6 +47,7 @@ public class Savings extends Account {
      */
     public double monthlyInterest() {
         DecimalFormat d = new DecimalFormat("#.##");
+        System.out.println(yearlyInterestRate);
         return Double.parseDouble(d.format((yearlyInterestRate/12) * balance));
     }
 
@@ -73,10 +74,13 @@ public class Savings extends Account {
 
     public void setClosed(boolean closed) {
         this.closed = closed;
-
         if(closed) {
             isLoyal = false;
         }
+    }
+
+    public boolean getLoyalty() {
+       return this.isLoyal;
     }
 
     /**

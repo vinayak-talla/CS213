@@ -83,6 +83,9 @@ public class MoneyMarket extends Savings {
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
         String loyal = "";
         String closedString = "";
+        if(this.balance >= 2500){
+            this.isLoyal = true;
+        }
         if(this.isLoyal){
             loyal = "::Loyal";
         }

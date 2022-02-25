@@ -58,7 +58,7 @@ public class CollegeChecking extends Checking {
         if(this.closed){
             closedString = "::CLOSED";
         }
-        return getType() + "::" + holder + "::Balance " + d.format(balance) + "::" + campusCode + closedString;
+        return getType() + "::" + holder + "::Balance " + d.format(balance) + closedString+ "::" + campusCode;
     }
 
     /**

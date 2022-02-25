@@ -9,11 +9,11 @@ import java.util.Scanner;
 public class BankTeller {
 
     /**
-     * Private helper method to check whether a potential account is valid
+     * Private helper method to open an account
      * @param tokens the user input as a String array
      * @param accountDatabase the database for all accounts
      */
-    public void openAccounts(String[] tokens, AccountDatabase accountDatabase){
+    private void openAccounts(String[] tokens, AccountDatabase accountDatabase){
         Account[] tempAccounts = accountDatabase.getAccounts();
         try {
             if(!validDOB(new Date(tokens[4]))) {
@@ -22,16 +22,17 @@ public class BankTeller {
             if(tokens[1].equals("C") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
                 Checking checking1 = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 Profile profile1 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
+                boolean oldChecking = false;
+                if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), checking1, accountDatabase.getNumAcct()) != -1) {
+                    oldChecking = tempAccounts[findAccount(accountDatabase.getAccounts(), checking1, accountDatabase.getNumAcct())].closed;
+                }
                 if(accountDatabase.open(checking1)){
                     System.out.println("Account opened.");
                 }
-                else if(checking1.getType().equals("College Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("Checking")){
+                else if(findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct()) == -1){
                     System.out.println(profile1 + " same account(type) is in the database.");
                 }
-                else if(checking1.getType().equals("Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("College Checking")){
-                    System.out.println(profile1 + " same account(type) is in the database.");
-                }
-                else if(checking1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType())){
+                else if(checking1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
                     System.out.println(profile1 + " same account(type) is in the database.");
                 }
                 else{
@@ -41,16 +42,20 @@ public class BankTeller {
             else if(tokens[1].equals("CC") && validAmount(tokens[0], Double.parseDouble(tokens[5])) && validCode(Integer.parseInt(tokens[6]))){
                 CollegeChecking checking2 = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
                 Profile profile2 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
+                boolean oldChecking = false;
+                if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), checking2, accountDatabase.getNumAcct()) != -1 ) {
+                    oldChecking = tempAccounts[findAccount(accountDatabase.getAccounts(), checking2, accountDatabase.getNumAcct())].closed;
+                }
                 if(accountDatabase.open(checking2)){
                     System.out.println("Account opened.");
                 }
-                else if(checking2.getType().equals("College Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("Checking")){
+                else if(findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct()) == -1){
                     System.out.println(profile2 + " same account(type) is in the database.");
                 }
-                else if(checking2.getType().equals("Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("College Checking")){
+                else if(findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct()) == -1){
                     System.out.println(profile2 + " same account(type) is in the database.");
                 }
-                else if(checking2.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType())){
+                else if(checking2.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
                     System.out.println(profile2 + " same account(type) is in the database.");
                 }
                 else{
@@ -60,10 +65,14 @@ public class BankTeller {
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
                 Savings savings1 = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
                 Profile profile3 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
+                boolean oldChecking = false;
+                if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), savings1, accountDatabase.getNumAcct()) != -1) {
+                    oldChecking = tempAccounts[findAccount(accountDatabase.getAccounts(), savings1, accountDatabase.getNumAcct())].closed;
+                }
                 if(accountDatabase.open(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6])))){
                     System.out.println("Account opened.");
                 }
-                else if(savings1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), savings1 ,accountDatabase.getNumAcct())].getType())){
+                else if(savings1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), savings1 ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
                     System.out.println(profile3 + " same account(type) is in the database.");
                 }
                 else{
@@ -73,10 +82,14 @@ public class BankTeller {
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5])) && validMM(Double.parseDouble(tokens[5]))) {
                 MoneyMarket moneyMarket1 = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 Profile profile4 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
+                boolean oldChecking = false;
+                if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), moneyMarket1, accountDatabase.getNumAcct()) != -1) {
+                    oldChecking = tempAccounts[findAccount(accountDatabase.getAccounts(), moneyMarket1, accountDatabase.getNumAcct())].closed;
+                }
                 if(accountDatabase.open(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5])))){
                     System.out.println("Account opened.");
                 }
-                else if(moneyMarket1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), moneyMarket1 ,accountDatabase.getNumAcct())].getType())){
+                else if(moneyMarket1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), moneyMarket1 ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
                     System.out.println(profile4 + " same account(type) is in the database.");
                 }
                 else{
@@ -157,7 +170,13 @@ public class BankTeller {
         return true;
     }
 
-    public void closeAccounts(String[] tokens, AccountDatabase accountDatabase) {
+
+    /**
+     * Private helper method to close an account
+     * @param tokens the user input as a String array
+     * @param accountDatabase the database for all accounts
+     */
+    private void closeAccounts(String[] tokens, AccountDatabase accountDatabase) {
         try {
             if (tokens[1].equals("C")) {
                 if (accountDatabase.close(new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0))) {
@@ -195,52 +214,71 @@ public class BankTeller {
         }
     }
 
+    /**
+     * Method that finds the index of an account in accounts
+     * @param accounts the array of accounts
+     * @param account which is the Account to find
+     * @param numAccts the number of accounts in the array
+     * @return the index of the found account or -1 if account isn't in accounts
+     */
     private int findAccount(Account[] accounts, Account account, int numAccts) {
         for(int i = 0; i < numAccts; i++) {
             if(accounts[i].equals(account)) {
-                return i;
+                if(!((accounts[i].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[i].getType().equals("Checking") && account.getType().equals("College Checking")))) {
+                    return i;
+
+                }
             }
         }
         return -1;
     }
 
+
+    /**
+     * Private helper method to deposit money into an account
+     * @param tokens the user input as a String array
+     * @param accountDatabase the database for all accounts
+     */
     public void depositAccounts(String[] tokens, AccountDatabase accountDatabase){
         try {
             if(tokens[1].equals("C") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                Checking checking = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]));
+                Checking checking = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 if(findAccount(accountDatabase.getAccounts(), checking,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(checking);
                     System.out.println("Deposit - balance updated.");
                 } else {
-                    System.out.println(checking.holder + " " + checking.getType() + " is not in database.");
+                    System.out.println(checking.holder + " " + checking.getType() + " is not in the database.");
                 }
 
             }
             else if(tokens[1].equals("CC") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                CollegeChecking collegeChecking = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0);
+                CollegeChecking collegeChecking = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), 0);
                 if(findAccount(accountDatabase.getAccounts(), collegeChecking,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(collegeChecking);
                     System.out.println("Deposit - balance updated.");
                 } else {
-                    System.out.println(collegeChecking.holder + " " + collegeChecking.getType() + " is not in database.");
+                    System.out.println(collegeChecking.holder + " " + collegeChecking.getType() + " is not in the database.");
                 }
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                Savings savings = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0);
+                int index = findAccount(accountDatabase.getAccounts(), new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), 1),accountDatabase.getNumAcct())
+                if(index != -1) {
+                    Savings savings = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), accountDatabase.getAccounts()[index]);
+                }
                 if(findAccount(accountDatabase.getAccounts(), savings,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(savings);
                     System.out.println("Deposit - balance updated.");
                 } else {
-                    System.out.println(savings.holder + " " + savings.getType() + " is not in database.");
+                    System.out.println(savings.holder + " " + savings.getType() + " is not in the database.");
                 }
             }
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                MoneyMarket moneyMarket = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]));
+                MoneyMarket moneyMarket = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 if(findAccount(accountDatabase.getAccounts(), moneyMarket,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(moneyMarket);
                     System.out.println("Deposit - balance updated.");
                 } else {
-                    System.out.println(moneyMarket.holder + " " + moneyMarket.getType() + " is not in database.");
+                    System.out.println(moneyMarket.holder + " " + moneyMarket.getType() + " is not in the database.");
                 }
             }
         }
@@ -253,6 +291,11 @@ public class BankTeller {
         }
     }
 
+    /**
+     * Private helper method to check if balance is enough for withdrawal and withdraws if enough
+     * @param accountDatabase the database for all accounts
+     * @param account the account with the balance of the withdrawal
+     */
     private void isSufficient(AccountDatabase accountDatabase, Account account) {
         if(accountDatabase.withdraw(account)) {
             System.out.println("Withdraw - balance updated.");
@@ -261,10 +304,15 @@ public class BankTeller {
         System.out.println("Withdraw - insufficient fund.");
     }
 
+    /**
+     * Private helper method to withdraw money into an account
+     * @param tokens the user input as a String array
+     * @param accountDatabase the database for all accounts
+     */
     public void withdrawAccounts(String[] tokens, AccountDatabase accountDatabase){
         try {
             if(tokens[1].equals("C") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                Checking checking = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]));
+                Checking checking = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 if(findAccount(accountDatabase.getAccounts(), checking,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,checking);
                 } else {
@@ -272,7 +320,7 @@ public class BankTeller {
                 }
             }
             else if(tokens[1].equals("CC") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                CollegeChecking collegeChecking = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0);
+                CollegeChecking collegeChecking = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), 0);
                 if(findAccount(accountDatabase.getAccounts(), collegeChecking,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,collegeChecking);
                 } else {
@@ -280,7 +328,7 @@ public class BankTeller {
                 }
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                Savings savings = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0);
+                Savings savings = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), 0);
                 if(findAccount(accountDatabase.getAccounts(), savings,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,savings);
                 } else {
@@ -288,7 +336,7 @@ public class BankTeller {
                 }
             }
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                MoneyMarket moneyMarket = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]));
+                MoneyMarket moneyMarket = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 if(findAccount(accountDatabase.getAccounts(), moneyMarket,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,moneyMarket);
                 } else {
@@ -305,6 +353,12 @@ public class BankTeller {
         }
     }
 
+    /**
+     * Private helper method to withdraw money into an account
+     * @param accountDatabase the database for all accounts
+     * @param command user input command of P, PT, PI, or UB
+     * @param numAcct the number of accounts in the array
+     */
     private void printAccounts(AccountDatabase accountDatabase, String command, int  numAcct) {
         if(numAcct == 0) {
             System.out.println("Account Database is empty!");
@@ -326,6 +380,9 @@ public class BankTeller {
 
 
 
+    /**
+     * Method that starts and runs the bank teller and user inputs
+     */
     public void run(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bank Teller is running.");

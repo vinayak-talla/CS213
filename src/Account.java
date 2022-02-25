@@ -47,7 +47,6 @@ public abstract class Account {
         Account acc = (Account) obj;
 
         if(this.holder.equals(acc.holder) && this.getType().equals(acc.getType())) {
-
             return true;
         }
         else if(this.holder.equals(acc.holder) && this.getType().equals("College Checking") && acc.getType().equals("Checking")){
@@ -56,6 +55,7 @@ public abstract class Account {
         else if(this.holder.equals(acc.holder) && this.getType().equals("Checking") && acc.getType().equals("College Checking")){
             return true;
         }
+
         return false;
     }
 

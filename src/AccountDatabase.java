@@ -61,6 +61,7 @@ public class AccountDatabase {
         if(numAcct == accounts.length-1){
             grow();
         }
+        int accIndex = find(account);
         if(find(account) == NOT_FOUND){
             accounts[numAcct] = account;
             numAcct++;
@@ -70,7 +71,7 @@ public class AccountDatabase {
             if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("Checking") && account.getType().equals("College Checking"))){
                 return false;
             }
-            if(accounts[find(account)].getType().equals(account.getType())){
+            if(accounts[find(account)].getType().equals(account.getType()) && !accounts[find(account)].closed){
                 return false;
             }
             accounts[find(account)].setClosed(false);
@@ -142,8 +143,8 @@ public class AccountDatabase {
         for(int i = 0; i < numAcct; i++) {
             minAccount = accounts[i].getType();
             for( int j = i + 1; j < numAcct; j++) {
+                if(accounts[j].getType().compareTo(minAccount) < 0) {
 
-                if(accounts[j].getType().compareTo(minAccount) == -1) {
                     minIndex = j;
                     minAccount = accounts[j].getType();
                 }
@@ -196,17 +197,21 @@ public class AccountDatabase {
 
     public static void main(String[] args){
         AccountDatabase accountDB = new AccountDatabase();
-//        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 950));
-//        accountDB.open(new Checking(new Profile("John", "Doe", new Date("2/19/1990")), 1766));
-//        accountDB.open(new CollegeChecking(new Profile("John", "Doe", new Date("2/19/1989")), 500.0, 0));
-//        accountDB.open(new CollegeChecking(new Profile("Chris", "Young", new Date("9/20/2001")), 500, 0));
+        accountDB.open(new Savings(new Profile("Leonard", "Fuller", new Date("1/15/1987")), 450, 1));
+        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 950));
+        accountDB.open(new Checking(new Profile("John", "Doe", new Date("2/19/1990")), 1766));
+        accountDB.open(new MoneyMarket(new Profile("Jane", "Martin", new Date("1/15/1987")), 450));
+        accountDB.open(new CollegeChecking(new Profile("John", "Doe", new Date("2/19/1989")), 500.0, 0));
+        accountDB.open(new CollegeChecking(new Profile("Chris", "Young", new Date("9/20/2001")), 500, 0));
+
+        accountDB.printByAccountType();
 //        accountDB.printFeeAndInterest();
 //        accountDB.updateFeesAndInterest();
 //        accountDB.close(new Checking(new Profile("April", "March", new Date("1/15/1987")), 0));
 //        accountDB.print();
-        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 300));
-        accountDB.open(new CollegeChecking(new Profile("April", "March", new Date("1/15/1987")), 490, 0));
-        accountDB.print();
+//        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 300));
+//        accountDB.open(new CollegeChecking(new Profile("April", "March", new Date("1/15/1987")), 490, 0));
+        //accountDB.print();
 
     }
 
