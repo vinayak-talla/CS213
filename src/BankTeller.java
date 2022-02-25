@@ -23,19 +23,19 @@ public class BankTeller {
                 Checking checking1 = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 Profile profile1 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(checking1)){
-                   System.out.println("Account opened.");
+                    System.out.println("Account opened.");
                 }
                 else if(checking1.getType().equals("College Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("Checking")){
-                    System.out.println(profile1 + " same account(type) is in the database");
+                    System.out.println(profile1 + " same account(type) is in the database.");
                 }
                 else if(checking1.getType().equals("Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("College Checking")){
-                    System.out.println(profile1 + " same account(type) is in the database");
+                    System.out.println(profile1 + " same account(type) is in the database.");
                 }
                 else if(checking1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType())){
-                    System.out.println(profile1 + " same account(type) is in the database");
+                    System.out.println(profile1 + " same account(type) is in the database.");
                 }
                 else{
-                    System.out.println("Account reopened");
+                    System.out.println("Account reopened.");
                 }
             }
             else if(tokens[1].equals("CC") && validAmount(tokens[0], Double.parseDouble(tokens[5])) && validCode(Integer.parseInt(tokens[6]))){
@@ -45,13 +45,13 @@ public class BankTeller {
                     System.out.println("Account opened.");
                 }
                 else if(checking2.getType().equals("College Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("Checking")){
-                    System.out.println(profile2 + " same account(type) is in the database");
+                    System.out.println(profile2 + " same account(type) is in the database.");
                 }
                 else if(checking2.getType().equals("Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("College Checking")){
-                    System.out.println(profile2 + " same account(type) is in the database");
+                    System.out.println(profile2 + " same account(type) is in the database.");
                 }
                 else if(checking2.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType())){
-                    System.out.println(profile2 + " same account(type) is in the database");
+                    System.out.println(profile2 + " same account(type) is in the database.");
                 }
                 else{
                     System.out.println("Account reopened.");
@@ -61,10 +61,10 @@ public class BankTeller {
                 Savings savings1 = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
                 Profile profile3 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6])))){
-                    System.out.println("Account opened");
+                    System.out.println("Account opened.");
                 }
                 else if(savings1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), savings1 ,accountDatabase.getNumAcct())].getType())){
-                    System.out.println(profile3 + " same account(type) is in the database");
+                    System.out.println(profile3 + " same account(type) is in the database.");
                 }
                 else{
                     System.out.println("Account reopened.");
@@ -74,10 +74,10 @@ public class BankTeller {
                 MoneyMarket moneyMarket1 = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 Profile profile4 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5])))){
-                    System.out.println("Account opened");
+                    System.out.println("Account opened.");
                 }
                 else if(moneyMarket1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), moneyMarket1 ,accountDatabase.getNumAcct())].getType())){
-                    System.out.println(profile4 + " same account(type) is in the database");
+                    System.out.println(profile4 + " same account(type) is in the database.");
                 }
                 else{
                     System.out.println("Account reopened.");
@@ -103,7 +103,7 @@ public class BankTeller {
         if(code == 0 || code == 1 || code == 2) {
             return true;
         }
-        System.out.println("Invalid campus code");
+        System.out.println("Invalid campus code.");
         return false;
     }
 
@@ -114,7 +114,7 @@ public class BankTeller {
      */
     private boolean validMM(Double deposit) {
         if( deposit < 2500) {
-            System.out.println("Minimum of $2500 to open a MoneyMarket account");
+            System.out.println("Minimum of $2500 to open a MoneyMarket account.");
             return false;
         }
         return true;
@@ -129,7 +129,7 @@ public class BankTeller {
         if(date.isValid() && date.isValidDOB()) {
             return true;
         }
-        System.out.println("Date of birth invalid");
+        System.out.println("Date of birth invalid.");
         return false;
     }
 
@@ -210,9 +210,9 @@ public class BankTeller {
                 Checking checking = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]));
                 if(findAccount(accountDatabase.getAccounts(), checking,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(checking);
-                    System.out.println("Deposit - balance updated");
+                    System.out.println("Deposit - balance updated.");
                 } else {
-                    System.out.println(checking.holder + " " + checking.getType() + " is not in database");
+                    System.out.println(checking.holder + " " + checking.getType() + " is not in database.");
                 }
 
             }
@@ -220,33 +220,33 @@ public class BankTeller {
                 CollegeChecking collegeChecking = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0);
                 if(findAccount(accountDatabase.getAccounts(), collegeChecking,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(collegeChecking);
-                    System.out.println("Deposit - balance updated");
+                    System.out.println("Deposit - balance updated.");
                 } else {
-                    System.out.println(collegeChecking.holder + " " + collegeChecking.getType() + " is not in database");
+                    System.out.println(collegeChecking.holder + " " + collegeChecking.getType() + " is not in database.");
                 }
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
                 Savings savings = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]), 0);
                 if(findAccount(accountDatabase.getAccounts(), savings,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(savings);
-                    System.out.println("Deposit - balance updated");
+                    System.out.println("Deposit - balance updated.");
                 } else {
-                    System.out.println(savings.holder + " " + savings.getType() + " is not in database");
+                    System.out.println(savings.holder + " " + savings.getType() + " is not in database.");
                 }
             }
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
                 MoneyMarket moneyMarket = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Integer.parseInt(tokens[5]));
                 if(findAccount(accountDatabase.getAccounts(), moneyMarket,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(moneyMarket);
-                    System.out.println("Deposit - balance updated");
+                    System.out.println("Deposit - balance updated.");
                 } else {
-                    System.out.println(moneyMarket.holder + " " + moneyMarket.getType() + " is not in database");
+                    System.out.println(moneyMarket.holder + " " + moneyMarket.getType() + " is not in database.");
                 }
             }
         }
 
         catch (IndexOutOfBoundsException ex) {
-            System.out.println("Missing data for depositing into account");
+            System.out.println("Missing data for depositing into account.");
         }
         catch (NumberFormatException ex) {
             System.out.println("Not a valid amount.");
@@ -255,7 +255,7 @@ public class BankTeller {
 
     private void isSufficient(AccountDatabase accountDatabase, Account account) {
         if(accountDatabase.withdraw(account)) {
-            System.out.println("Withdraw - balance updated");
+            System.out.println("Withdraw - balance updated.");
             return;
         }
         System.out.println("Withdraw - insufficient fund.");
@@ -268,7 +268,7 @@ public class BankTeller {
                 if(findAccount(accountDatabase.getAccounts(), checking,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,checking);
                 } else {
-                    System.out.println(checking.holder + " " + checking.getType() + " is not in database");
+                    System.out.println(checking.holder + " " + checking.getType() + " is not in database.");
                 }
             }
             else if(tokens[1].equals("CC") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
@@ -276,7 +276,7 @@ public class BankTeller {
                 if(findAccount(accountDatabase.getAccounts(), collegeChecking,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,collegeChecking);
                 } else {
-                    System.out.println(collegeChecking.holder + " " + collegeChecking.getType() + " is not in database");
+                    System.out.println(collegeChecking.holder + " " + collegeChecking.getType() + " is not in database.");
                 }
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
@@ -284,7 +284,7 @@ public class BankTeller {
                 if(findAccount(accountDatabase.getAccounts(), savings,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,savings);
                 } else {
-                    System.out.println(savings.holder + " " + savings.getType() + " is not in database");
+                    System.out.println(savings.holder + " " + savings.getType() + " is not in database.");
                 }
             }
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
@@ -292,13 +292,13 @@ public class BankTeller {
                 if(findAccount(accountDatabase.getAccounts(), moneyMarket,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,moneyMarket);
                 } else {
-                    System.out.println(moneyMarket.holder + " " + moneyMarket.getType() + " is not in database");
+                    System.out.println(moneyMarket.holder + " " + moneyMarket.getType() + " is not in database.");
                 }
             }
 
         }
         catch (IndexOutOfBoundsException ex) {
-            System.out.println("Missing data for withdrawing from account");
+            System.out.println("Missing data for withdrawing from account.");
         }
         catch (NumberFormatException ex) {
             System.out.println("Not a valid amount.");
@@ -365,3 +365,4 @@ public class BankTeller {
         new BankTeller().run();
     }
 }
+

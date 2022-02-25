@@ -10,7 +10,6 @@ public class AccountDatabase {
     private int numAcct;
     public static final int NOT_FOUND= -1;
 
-
     /**
      * Constructor for AccountDatabase class
      * Instantiates AccountDatabase object instantiating accounts array with a default size of 4 and sets numAcct to 0
@@ -68,7 +67,7 @@ public class AccountDatabase {
             return true;
         }
         else{
-            if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking"))){
+            if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("Checking") && account.getType().equals("College Checking"))){
                 return false;
             }
             if(accounts[find(account)].getType().equals(account.getType())){
@@ -123,11 +122,13 @@ public class AccountDatabase {
      * Method that prints out the list of accounts based on their place in the array
      */
     public void print(){
+        System.out.println();
         System.out.println("*list of accounts in the database*");
         for(int i = 0; i < numAcct; i++) {
             System.out.println(accounts[i]);
         }
         System.out.println("*end of list*");
+        System.out.println();
 
     }
 
@@ -159,7 +160,7 @@ public class AccountDatabase {
         for(int i = 0; i < numAcct; i++){
             System.out.println(accounts[i]);
         }
-        System.out.println("*end of list");
+        System.out.println("*end of list.");
         System.out.println();
     }
 
@@ -168,6 +169,7 @@ public class AccountDatabase {
      */
     public void printFeeAndInterest(){
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
+        System.out.println();
         System.out.println("*list of accounts with fee and monthly interest");
         for(int i = 0; i < numAcct; i++){
             System.out.println(accounts[i] + "::fee " + d.format(accounts[i].fee()) + "::monthly interest " + d.format(accounts[i].monthlyInterest()));
@@ -181,6 +183,7 @@ public class AccountDatabase {
      */
     public void updateFeesAndInterest(){
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
+        System.out.println();
         System.out.println("*list of accounts with updated balance");
         for(int i = 0; i < numAcct; i++){
             accounts[i].deposit(accounts[i].monthlyInterest());
@@ -193,15 +196,16 @@ public class AccountDatabase {
 
     public static void main(String[] args){
         AccountDatabase accountDB = new AccountDatabase();
-        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 950));
-        accountDB.open(new Checking(new Profile("John", "Doe", new Date("2/19/1990")), 1766));
-        accountDB.open(new CollegeChecking(new Profile("John", "Doe", new Date("2/19/1989")), 500.0, 0));
-        accountDB.open(new CollegeChecking(new Profile("Chris", "Young", new Date("9/20/2001")), 500, 0));
-        accountDB.printFeeAndInterest();
-        accountDB.updateFeesAndInterest();
-        accountDB.close(new Checking(new Profile("April", "March", new Date("1/15/1987")), 0));
-        accountDB.print();
-        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 200));
+//        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 950));
+//        accountDB.open(new Checking(new Profile("John", "Doe", new Date("2/19/1990")), 1766));
+//        accountDB.open(new CollegeChecking(new Profile("John", "Doe", new Date("2/19/1989")), 500.0, 0));
+//        accountDB.open(new CollegeChecking(new Profile("Chris", "Young", new Date("9/20/2001")), 500, 0));
+//        accountDB.printFeeAndInterest();
+//        accountDB.updateFeesAndInterest();
+//        accountDB.close(new Checking(new Profile("April", "March", new Date("1/15/1987")), 0));
+//        accountDB.print();
+        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 300));
+        accountDB.open(new CollegeChecking(new Profile("April", "March", new Date("1/15/1987")), 490, 0));
         accountDB.print();
 
     }

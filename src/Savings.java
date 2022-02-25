@@ -9,7 +9,6 @@ public class Savings extends Account {
     private static double yearlyInterestRate;
     private boolean isLoyal;
 
-
     /**
      * Default constructor for Savings class
      */
@@ -72,6 +71,13 @@ public class Savings extends Account {
         return "Savings";
     }
 
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+
+        if(closed) {
+            isLoyal = false;
+        }
+    }
 
     /**
      * Method to print out Savings object
@@ -100,3 +106,4 @@ public class Savings extends Account {
 
     }
 }
+

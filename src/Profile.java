@@ -1,3 +1,4 @@
+
 /**
  *
  * @author Alvin Alex, Vinayak Talla
@@ -30,8 +31,8 @@ public class Profile {
     }
 
     public boolean equals(Profile profile){ // test this method
-        if(this.fname.equals(profile.fname)){
-            if(this.lname.equals(profile.lname)){
+        if(this.fname.toLowerCase().equals(profile.fname.toLowerCase())){
+            if(this.lname.toLowerCase().equals(profile.lname.toLowerCase())){
                 if(this.dob.compareTo(profile.dob) == 0){
                     return true;
                 }

@@ -28,7 +28,6 @@ public class MoneyMarket extends Savings {
         this.isLoyal = loyal;
     }
 
-
     public void withdraw(double amount){
         this.balance = this.balance - amount;
         if(this.balance < 2500.0){
@@ -60,14 +59,21 @@ public class MoneyMarket extends Savings {
         }
     }
 
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+
+        if(closed) {
+            isLoyal = false;
+        }
+    }
+
     /**
      * Method to determine Account type
      * @return type of Account as String
      */
     public String getType() {
-        return "Money Market";
+        return "Money Market Savings";
     }
-
 
     /**
      * Method to print out MoneyMarket object
@@ -92,7 +98,6 @@ public class MoneyMarket extends Savings {
         System.out.println(moneyMarket1);
         System.out.println(moneyMarket2);
         moneyMarket2.withdraw(200);
-
         System.out.println(moneyMarket2);
     }
 }

@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
  * Class that represents a Checking Account, a type of Account, with a profile, and balance
  */
 public class Checking extends Account {
-
     private static final double YEARLYINTERESTRATE = 0.001;
 
     /**
@@ -66,7 +65,6 @@ public class Checking extends Account {
         checking1.withdraw(100);
         System.out.println(checking1);
         System.out.println(checking2);
-
         System.out.println(checking1.monthlyInterest());
     }
 
