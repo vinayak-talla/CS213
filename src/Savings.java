@@ -1,4 +1,3 @@
-package project2;
 import java.text.DecimalFormat;
 /**
  *
@@ -9,6 +8,11 @@ import java.text.DecimalFormat;
 public class Savings extends Account {
     private static double yearlyInterestRate;
     private boolean isLoyal;
+
+
+    /**
+     * Default constructor for Savings class
+     */
     public Savings() {
 
     }
@@ -68,13 +72,6 @@ public class Savings extends Account {
         return "Savings";
     }
 
-    public void setClosed(boolean closed) {
-        this.closed = closed;
-
-        if(closed) {
-            isLoyal = false;
-        }
-    }
 
     /**
      * Method to print out Savings object

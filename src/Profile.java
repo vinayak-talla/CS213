@@ -1,5 +1,3 @@
-package project2;
-
 /**
  *
  * @author Alvin Alex, Vinayak Talla

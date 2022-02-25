@@ -1,15 +1,21 @@
-package project2;
-
 import java.text.DecimalFormat;
 /**
  *
  * @author Alvin Alex, Vinayak Talla
+ *
+ * Class that represents a MoneyMarket Account, a type of Account, with a profile, balance
  */
 public class MoneyMarket extends Savings {
     private double yearlyInterestRate;
     private int numOfWithdrawals = 0;
     private boolean isLoyal;
 
+    /**
+     * Constructor for MoneyMarket class
+     * Instantiates MoneyMarket object with Profile, and balance from parameters
+     * @param profile the name and date of birth of the account holder
+     * @param balance the initial deposit into the account
+     */
     public MoneyMarket(Profile profile, double balance){
         this.holder = profile;
         this.balance = balance;
@@ -22,6 +28,7 @@ public class MoneyMarket extends Savings {
         this.isLoyal = loyal;
     }
 
+
     public void withdraw(double amount){
         this.balance = this.balance - amount;
         if(this.balance < 2500.0){
@@ -31,11 +38,19 @@ public class MoneyMarket extends Savings {
         numOfWithdrawals ++;
     }
 
+    /**
+     * Method to determine monthly interest
+     * @return value of monthly interest
+     */
     public double monthlyInterest() {
         DecimalFormat d = new DecimalFormat("#.##");
         return Double.parseDouble(d.format((yearlyInterestRate/12) * balance));
     }
 
+    /**
+     * Method to determine monthly fees
+     * @return value of monthly fees
+     */
     public double fee() {
         if(balance >= 2500 && numOfWithdrawals <= 3){
             return 0;
@@ -45,18 +60,19 @@ public class MoneyMarket extends Savings {
         }
     }
 
-    public void setClosed(boolean closed) {
-        this.closed = closed;
-
-        if(closed) {
-            isLoyal = false;
-        }
-    }
-
+    /**
+     * Method to determine Account type
+     * @return type of Account as String
+     */
     public String getType() {
         return "Money Market";
     }
 
+
+    /**
+     * Method to print out MoneyMarket object
+     * @return MoneyMarket object formatted as String
+     */
     public String toString(){
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
         String loyal = "";

@@ -1,9 +1,9 @@
-package project2;
-
 import java.text.DecimalFormat;
 /**
  *
  * @author Alvin Alex, Vinayak Talla
+ *
+ * Class that represents the database of Accounts
  */
 public class AccountDatabase {
     private Account[] accounts;
@@ -11,6 +11,10 @@ public class AccountDatabase {
     public static final int NOT_FOUND= -1;
 
 
+    /**
+     * Constructor for AccountDatabase class
+     * Instantiates AccountDatabase object instantiating accounts array with a default size of 4 and sets numAcct to 0
+     */
     public AccountDatabase(){
         this.accounts = new Account[4];
         this.numAcct = 0;
@@ -24,6 +28,11 @@ public class AccountDatabase {
         return numAcct;
     }
 
+    /**
+     * Method that finds the index of an account in accounts
+     * @param account which is the Account to find
+     * @return the index of the found account or NOT_FOUND if account isn't in accounts
+     */
     private int find(Account account){
         for(int i = 0; i < numAcct; i++){
             if(accounts[i].equals(account)){
@@ -33,6 +42,9 @@ public class AccountDatabase {
         return NOT_FOUND;
     }
 
+    /**
+     * Method that increases the size of the accounts array by 4
+     */
     private void grow(){
         Account[] temp = new Account[accounts.length + 4];
         for(int i = 0; i < accounts.length; i++){
@@ -41,6 +53,11 @@ public class AccountDatabase {
         accounts = temp;
     }
 
+    /**
+     * Method that opens a new account and adds it to the accounts array and grows it if it is full.
+     * @param account that needs to be opened
+     * @return boolean value representing if the account was opened successfully
+     */
     public boolean open(Account account){
         if(numAcct == accounts.length-1){
             grow();
@@ -51,7 +68,7 @@ public class AccountDatabase {
             return true;
         }
         else{
-            if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("College project2.Checking") && account.getType().equals("project2.Checking"))){
+            if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking"))){
                 return false;
             }
             if(accounts[find(account)].getType().equals(account.getType())){
@@ -63,6 +80,11 @@ public class AccountDatabase {
         }
     }
 
+    /**
+     * Method that closes an account in the accounts array
+     * @param account that needs to be closed
+     * @return boolean value representing if the account was closed successfully
+     */
     public boolean close(Account account){
         int indexOfAccount = find(account);
         if(accounts[indexOfAccount].getClosed()) {
@@ -74,10 +96,19 @@ public class AccountDatabase {
         return true;
     }
 
+    /**
+     * Method that deposits money into an account
+     * @param account the account with a balance of the deposit for the account in the array
+     */
     public void deposit(Account account){
         accounts[find(account)].deposit(account.balance);
     }
 
+    /**
+     * Method that withdraws money from an account
+     * @param account the account with a balance of the withdrawal for the account in the array
+     * @return boolean value of whether the withdrawal was successful
+     */
     public boolean withdraw(Account account){
         if(accounts[find(account)].balance - account.balance <= 0){
             return false;
@@ -88,6 +119,9 @@ public class AccountDatabase {
         }
     }
 
+    /**
+     * Method that prints out the list of accounts based on their place in the array
+     */
     public void print(){
         System.out.println("*list of accounts in the database*");
         for(int i = 0; i < numAcct; i++) {
@@ -97,6 +131,9 @@ public class AccountDatabase {
 
     }
 
+    /**
+     * Method that prints out the list of accounts based on the account type
+     */
     public void printByAccountType(){
         Account temp = null;
         int minIndex = 0;
@@ -126,6 +163,9 @@ public class AccountDatabase {
         System.out.println();
     }
 
+    /**
+     * Method that prints out the list of accounts with fees and interest based on their place in the array
+     */
     public void printFeeAndInterest(){
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
         System.out.println("*list of accounts with fee and monthly interest");
@@ -136,6 +176,9 @@ public class AccountDatabase {
         System.out.println();
     }
 
+    /**
+     * Method that updates the fees and interests and prints out the list of accounts based on their place in the array
+     */
     public void updateFeesAndInterest(){
         DecimalFormat d = new DecimalFormat("'$'###,###,##0.00");
         System.out.println("*list of accounts with updated balance");

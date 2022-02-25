@@ -1,5 +1,3 @@
-package project2;
-
 import java.util.StringTokenizer;
 import java.util.Calendar;
 
@@ -185,7 +183,7 @@ public class Date implements Comparable<Date>{
 
     /**
      * Method to print out Date object
-     * @return project2.Date object formatted as a string
+     * @return Date object formatted as a string
      */
     public String toString(){
         return this.month + "/" + this.day + "/" + this.year;

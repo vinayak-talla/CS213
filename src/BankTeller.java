@@ -1,12 +1,18 @@
-package project2;
-
 import java.util.Scanner;
 
 /**
  *
  * @author Alvin Alex, Vinayak Talla
+ *
+ * Class that represents a bank teller with user input commands
  */
 public class BankTeller {
+
+    /**
+     * Private helper method to check whether a potential account is valid
+     * @param tokens the user input as a String array
+     * @param accountDatabase the database for all accounts
+     */
     public void openAccounts(String[] tokens, AccountDatabase accountDatabase){
         Account[] tempAccounts = accountDatabase.getAccounts();
         try {
@@ -19,17 +25,17 @@ public class BankTeller {
                 if(accountDatabase.open(checking1)){
                    System.out.println("Account opened.");
                 }
-                else if(checking1.getType().equals("College Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("project2.Checking")){
+                else if(checking1.getType().equals("College Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("Checking")){
                     System.out.println(profile1 + " same account(type) is in the database");
                 }
-                else if(checking1.getType().equals("project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("College project2.Checking")){
+                else if(checking1.getType().equals("Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType().equals("College Checking")){
                     System.out.println(profile1 + " same account(type) is in the database");
                 }
                 else if(checking1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType())){
                     System.out.println(profile1 + " same account(type) is in the database");
                 }
                 else{
-                    System.out.println("project2.Account reopened");
+                    System.out.println("Account reopened");
                 }
             }
             else if(tokens[1].equals("CC") && validAmount(tokens[0], Double.parseDouble(tokens[5])) && validCode(Integer.parseInt(tokens[6]))){
@@ -38,10 +44,10 @@ public class BankTeller {
                 if(accountDatabase.open(checking2)){
                     System.out.println("Account opened.");
                 }
-                else if(checking2.getType().equals("College project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("project2.Checking")){
+                else if(checking2.getType().equals("College Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("Checking")){
                     System.out.println(profile2 + " same account(type) is in the database");
                 }
-                else if(checking2.getType().equals("project2.Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("College project2.Checking")){
+                else if(checking2.getType().equals("Checking") && tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType().equals("College Checking")){
                     System.out.println(profile2 + " same account(type) is in the database");
                 }
                 else if(checking2.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType())){
@@ -68,7 +74,7 @@ public class BankTeller {
                 MoneyMarket moneyMarket1 = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
                 Profile profile4 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
                 if(accountDatabase.open(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5])))){
-                    System.out.println("project2.Account opened");
+                    System.out.println("Account opened");
                 }
                 else if(moneyMarket1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), moneyMarket1 ,accountDatabase.getNumAcct())].getType())){
                     System.out.println(profile4 + " same account(type) is in the database");
@@ -88,6 +94,11 @@ public class BankTeller {
 
     }
 
+    /**
+     * Private helper method to check whether a campus code is valid
+     * @param code the campus code to be validated
+     * @return  boolean value of whether the campus code is valid
+     */
     private boolean validCode(int code) {
         if(code == 0 || code == 1 || code == 2) {
             return true;
@@ -96,22 +107,38 @@ public class BankTeller {
         return false;
     }
 
+    /**
+     * Private helper method to check whether the initial deposit into a MoneyMarker account is valid
+     * @param deposit the initial deposit in the MoneyMarket account
+     * @return  boolean value of whether the initial deposit is valid
+     */
     private boolean validMM(Double deposit) {
         if( deposit < 2500) {
-            System.out.println("Minimum of $2500 to open a project2.MoneyMarket account");
+            System.out.println("Minimum of $2500 to open a MoneyMarket account");
             return false;
         }
         return true;
     }
 
+    /**
+     * Private helper method to check whether a date of birth is valid
+     * @param date the date of birth to be validated
+     * @return  boolean value of whether the date of birth is valid
+     */
     private boolean validDOB(Date date) {
         if(date.isValid() && date.isValidDOB()) {
             return true;
         }
-        System.out.println("project2.Date of birth invalid");
+        System.out.println("Date of birth invalid");
         return false;
     }
 
+    /**
+     * Private helper method to check whether a deposit or withdrawal amount is valid
+     * @param command user input command of D for deposit or W for withdrawal
+     * @param amount the amount to be potentially deposited or withdrawn
+     * @return  boolean value of whether the amount is valid
+     */
     private boolean validAmount(String command, Double amount) {
         if(amount <= 0){
             if(command.equals("O")) {
@@ -134,27 +161,27 @@ public class BankTeller {
         try {
             if (tokens[1].equals("C")) {
                 if (accountDatabase.close(new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0))) {
-                    System.out.println("project2.Account closed.");
+                    System.out.println("Account closed.");
                 } else {
-                    System.out.println("project2.Account is closed already.");
+                    System.out.println("Account is closed already.");
                 }
             } else if (tokens[1].equals("CC")) {
                 if (accountDatabase.close(new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0, 0))) {
-                    System.out.println("project2.Account closed.");
+                    System.out.println("Account closed.");
                 } else {
-                    System.out.println("project2.Account is closed already.");
+                    System.out.println("Account is closed already.");
                 }
             } else if (tokens[1].equals("S")) {
                 if (accountDatabase.close(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0, 0))) {
-                    System.out.println("project2.Account closed.");
+                    System.out.println("Account closed.");
                 } else {
-                    System.out.println("project2.Account is closed already.");
+                    System.out.println("Account is closed already.");
                 }
             } else if (tokens[1].equals("MM")) {
                 if (accountDatabase.close(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0)))
-                    System.out.println("project2.Account closed.");
+                    System.out.println("Account closed.");
                 else {
-                    System.out.println("project2.Account is closed already.");
+                    System.out.println("Account is closed already.");
                 }
             }
 
@@ -280,7 +307,7 @@ public class BankTeller {
 
     private void printAccounts(AccountDatabase accountDatabase, String command, int  numAcct) {
         if(numAcct == 0) {
-            System.out.println("project2.Account Database is empty!");
+            System.out.println("Account Database is empty!");
             return;
         }
         if(command.equals("P")) {
@@ -311,7 +338,7 @@ public class BankTeller {
                 openAccounts(tokens, accountDatabase);
             }
             else if(tokens[0].equals("C")){
-                //removeAppointment(schedule, new Appointment(new Patient(tokens[2], tokens[3], new project2.Date(tokens[1])), new Timeslot(new project2.Date(tokens[4]), new Time(tokens[5])), location));
+                //removeAppointment(schedule, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
                 closeAccounts(tokens, accountDatabase);
             }
             else if(tokens[0].equals("D")){
