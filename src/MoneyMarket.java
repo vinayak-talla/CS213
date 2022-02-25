@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
  */
 public class MoneyMarket extends Savings {
     private double yearlyInterestRate;
-    private int numOfWithdrawals = 0;
+    private int numOfWithdrawals;
     private boolean isLoyal;
 
     /**
@@ -21,6 +21,7 @@ public class MoneyMarket extends Savings {
         this.balance = balance;
         this.isLoyal = true;
         yearlyInterestRate = 0.0095;
+        numOfWithdrawals = 0;
         this.closed = false;
     }
 
@@ -64,6 +65,7 @@ public class MoneyMarket extends Savings {
 
         if(closed) {
             isLoyal = false;
+            numOfWithdrawals = 0;
         }
     }
 
@@ -92,7 +94,7 @@ public class MoneyMarket extends Savings {
         if(this.closed){
             closedString = "::CLOSED";
         }
-        return getType() + "::" + holder + "::Balance " + d.format(balance) + loyal + closedString + "::withdrawl: " + numOfWithdrawals;
+        return getType() + "::" + holder + "::Balance " + d.format(balance) + loyal + closedString + "::withdrawl: " + (numOfWithdrawals);
     }
 
     public static void main(String[] args){

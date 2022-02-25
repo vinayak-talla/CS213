@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
  * Class that represents a Savings Account, a type of Account, with a profile, balance, and loyalty
  */
 public class Savings extends Account {
-    private static double yearlyInterestRate;
+    private double yearlyInterestRate;
     private boolean isLoyal;
 
     /**
@@ -29,14 +29,10 @@ public class Savings extends Account {
         this.closed = false;
         if(customerLoyalty == 0) {
             isLoyal = false;
-        }
-        else {
-            isLoyal = true;
-        }
-        if(!isLoyal){
             yearlyInterestRate = .003;
         }
         else {
+            isLoyal = true;
             yearlyInterestRate = 0.0045;
         }
     }
@@ -47,7 +43,6 @@ public class Savings extends Account {
      */
     public double monthlyInterest() {
         DecimalFormat d = new DecimalFormat("#.##");
-        System.out.println(yearlyInterestRate);
         return Double.parseDouble(d.format((yearlyInterestRate/12) * balance));
     }
 

@@ -59,6 +59,7 @@ public class BankTeller {
                     System.out.println(profile2 + " same account(type) is in the database.");
                 }
                 else{
+
                     System.out.println("Account reopened.");
                 }
             }
@@ -261,10 +262,7 @@ public class BankTeller {
                 }
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
-                int index = findAccount(accountDatabase.getAccounts(), new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), 1),accountDatabase.getNumAcct())
-                if(index != -1) {
-                    Savings savings = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), accountDatabase.getAccounts()[index]);
-                }
+                Savings savings = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), 0);
                 if(findAccount(accountDatabase.getAccounts(), savings,accountDatabase.getNumAcct()) != -1) {
                     accountDatabase.deposit(savings);
                     System.out.println("Deposit - balance updated.");
@@ -316,7 +314,7 @@ public class BankTeller {
                 if(findAccount(accountDatabase.getAccounts(), checking,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,checking);
                 } else {
-                    System.out.println(checking.holder + " " + checking.getType() + " is not in database.");
+                    System.out.println(checking.holder + " " + checking.getType() + " is not in the database.");
                 }
             }
             else if(tokens[1].equals("CC") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
@@ -324,7 +322,7 @@ public class BankTeller {
                 if(findAccount(accountDatabase.getAccounts(), collegeChecking,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,collegeChecking);
                 } else {
-                    System.out.println(collegeChecking.holder + " " + collegeChecking.getType() + " is not in database.");
+                    System.out.println(collegeChecking.holder + " " + collegeChecking.getType() + " is not in the database.");
                 }
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
@@ -332,7 +330,7 @@ public class BankTeller {
                 if(findAccount(accountDatabase.getAccounts(), savings,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,savings);
                 } else {
-                    System.out.println(savings.holder + " " + savings.getType() + " is not in database.");
+                    System.out.println(savings.holder + " " + savings.getType() + " is not in the database.");
                 }
             }
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
@@ -340,7 +338,7 @@ public class BankTeller {
                 if(findAccount(accountDatabase.getAccounts(), moneyMarket,accountDatabase.getNumAcct()) != -1) {
                     isSufficient(accountDatabase,moneyMarket);
                 } else {
-                    System.out.println(moneyMarket.holder + " " + moneyMarket.getType() + " is not in database.");
+                    System.out.println(moneyMarket.holder + " " + moneyMarket.getType() + " is not in the database.");
                 }
             }
 
@@ -409,6 +407,9 @@ public class BankTeller {
             }
             else if(tokens[0].equals("Q")) {
                 break;
+            }
+            else if(tokens[0].equals("")){
+
             }
             else {
                 System.out.println("Invalid command!");

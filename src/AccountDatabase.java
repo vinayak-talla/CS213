@@ -76,6 +76,10 @@ public class AccountDatabase {
             }
             accounts[find(account)].setClosed(false);
             accounts[find(account)].setBalance(account.balance);
+            if(accounts[find(account)].getType().equals("College Checking")){
+                accounts[find(account)] = account;
+            }
+
             return false;
         }
     }
@@ -188,7 +192,7 @@ public class AccountDatabase {
         System.out.println("*list of accounts with updated balance");
         for(int i = 0; i < numAcct; i++){
             accounts[i].deposit(accounts[i].monthlyInterest());
-            accounts[i].withdraw(accounts[i].fee());
+            accounts[i].setBalance(accounts[i].balance - accounts[i].fee());
             System.out.println(accounts[i]);
         }
         System.out.println("*end of list.");
