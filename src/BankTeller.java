@@ -10,93 +10,55 @@ public class BankTeller {
 
     /**
      * Private helper method to open an account
+     * @param accountDatabase the database for all accounts
+     * @param account the account the user inputs
+     */
+    private void sameAccount(AccountDatabase accountDatabase, Account account) {
+        boolean oldChecking = false;
+        if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), account, accountDatabase.getNumAcct()) != -1) {
+            oldChecking = accountDatabase.getAccounts()[findAccount(accountDatabase.getAccounts(), account, accountDatabase.getNumAcct())].closed;
+        }
+        System.out.println(oldChecking);
+        if(accountDatabase.open(account)){
+            System.out.println("Account opened.");
+        }
+        else if((account.getType().equals("Checking") || account.getType().equals("College Checking")) && findAccount(accountDatabase.getAccounts(), account ,accountDatabase.getNumAcct()) == -1) {
+            System.out.println(account.holder + " same account(type) is in the database.");
+        }
+
+        else if(account.getType().equals(accountDatabase.getAccounts()[findAccount(accountDatabase.getAccounts(), account ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
+            System.out.println(account.holder + " same account(type) is in the database.");
+        }
+        else{
+            System.out.println("Account reopened.");
+        }
+    }
+
+    /**
+     * Private helper method to find type of account
      * @param tokens the user input as a String array
      * @param accountDatabase the database for all accounts
      */
-    private void openAccounts(String[] tokens, AccountDatabase accountDatabase){
-        Account[] tempAccounts = accountDatabase.getAccounts();
+    private void findAccountType(String[] tokens, AccountDatabase accountDatabase){
         try {
             if(!validDOB(new Date(tokens[4]))) {
                 return;
             }
             if(tokens[1].equals("C") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
                 Checking checking1 = new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
-                Profile profile1 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
-                boolean oldChecking = false;
-                if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), checking1, accountDatabase.getNumAcct()) != -1) {
-                    oldChecking = tempAccounts[findAccount(accountDatabase.getAccounts(), checking1, accountDatabase.getNumAcct())].closed;
-                }
-                if(accountDatabase.open(checking1)){
-                    System.out.println("Account opened.");
-                }
-                else if(findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct()) == -1){
-                    System.out.println(profile1 + " same account(type) is in the database.");
-                }
-                else if(checking1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking1 ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
-                    System.out.println(profile1 + " same account(type) is in the database.");
-                }
-                else{
-                    System.out.println("Account reopened.");
-                }
+                sameAccount(accountDatabase,checking1);
             }
             else if(tokens[1].equals("CC") && validAmount(tokens[0], Double.parseDouble(tokens[5])) && validCode(Integer.parseInt(tokens[6]))){
                 CollegeChecking checking2 = new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
-                Profile profile2 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
-                boolean oldChecking = false;
-                if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), checking2, accountDatabase.getNumAcct()) != -1 ) {
-                    oldChecking = tempAccounts[findAccount(accountDatabase.getAccounts(), checking2, accountDatabase.getNumAcct())].closed;
-                }
-                if(accountDatabase.open(checking2)){
-                    System.out.println("Account opened.");
-                }
-                else if(findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct()) == -1){
-                    System.out.println(profile2 + " same account(type) is in the database.");
-                }
-                else if(findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct()) == -1){
-                    System.out.println(profile2 + " same account(type) is in the database.");
-                }
-                else if(checking2.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), checking2 ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
-                    System.out.println(profile2 + " same account(type) is in the database.");
-                }
-                else{
-
-                    System.out.println("Account reopened.");
-                }
+                sameAccount(accountDatabase,checking2);
             }
             else if(tokens[1].equals("S") && validAmount(tokens[0], Double.parseDouble(tokens[5]))){
                 Savings savings1 = new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6]));
-                Profile profile3 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
-                boolean oldChecking = false;
-                if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), savings1, accountDatabase.getNumAcct()) != -1) {
-                    oldChecking = tempAccounts[findAccount(accountDatabase.getAccounts(), savings1, accountDatabase.getNumAcct())].closed;
-                }
-                if(accountDatabase.open(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]), Integer.parseInt(tokens[6])))){
-                    System.out.println("Account opened.");
-                }
-                else if(savings1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), savings1 ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
-                    System.out.println(profile3 + " same account(type) is in the database.");
-                }
-                else{
-                    System.out.println("Account reopened.");
-                }
+                sameAccount(accountDatabase,savings1);
             }
             else if(tokens[1].equals("MM") && validAmount(tokens[0], Double.parseDouble(tokens[5])) && validMM(Double.parseDouble(tokens[5]))) {
                 MoneyMarket moneyMarket1 = new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5]));
-                Profile profile4 = new Profile(tokens[2], tokens[3], new Date(tokens[4]));
-                boolean oldChecking = false;
-                if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), moneyMarket1, accountDatabase.getNumAcct()) != -1) {
-                    oldChecking = tempAccounts[findAccount(accountDatabase.getAccounts(), moneyMarket1, accountDatabase.getNumAcct())].closed;
-                }
-                if(accountDatabase.open(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), Double.parseDouble(tokens[5])))){
-                    System.out.println("Account opened.");
-                }
-                else if(moneyMarket1.getType().equals(tempAccounts[findAccount(accountDatabase.getAccounts(), moneyMarket1 ,accountDatabase.getNumAcct())].getType()) && !oldChecking){
-                    System.out.println(profile4 + " same account(type) is in the database.");
-                }
-                else{
-                    System.out.println("Account reopened.");
-                }
-
+                sameAccount(accountDatabase,moneyMarket1);
             }
         }
         catch (IndexOutOfBoundsException ex) {
@@ -105,7 +67,6 @@ public class BankTeller {
         catch (NumberFormatException ex) {
             System.out.println("Not a valid amount.");
         }
-
     }
 
     /**
@@ -204,9 +165,7 @@ public class BankTeller {
                     System.out.println("Account is closed already.");
                 }
             }
-
         }
-
         catch (IndexOutOfBoundsException ex) {
             System.out.println("Missing data for closing an account.");
         }
@@ -390,7 +349,7 @@ public class BankTeller {
             Account[] tempAccts = accountDatabase.getAccounts();
             int numAccts = accountDatabase.getNumAcct();
             if(tokens[0].equals("O")){
-                openAccounts(tokens, accountDatabase);
+                findAccountType(tokens, accountDatabase);
             }
             else if(tokens[0].equals("C")){
                 //removeAppointment(schedule, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
