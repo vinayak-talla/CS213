@@ -18,7 +18,6 @@ public class BankTeller {
         if(accountDatabase.getNumAcct() > 0 && findAccount(accountDatabase.getAccounts(), account, accountDatabase.getNumAcct()) != -1) {
             oldChecking = accountDatabase.getAccounts()[findAccount(accountDatabase.getAccounts(), account, accountDatabase.getNumAcct())].closed;
         }
-        System.out.println(oldChecking);
         if(accountDatabase.open(account)){
             System.out.println("Account opened.");
         }
