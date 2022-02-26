@@ -91,6 +91,9 @@ public class AccountDatabase {
      */
     public boolean close(Account account){
         int indexOfAccount = find(account);
+
+        if(find(account) == -1) {return false;}
+
         if(accounts[indexOfAccount].getClosed()) {
             return false;
         }
