@@ -25,6 +25,19 @@ public class MoneyMarket extends Savings {
         this.closed = false;
     }
 
+    /**
+     * Method that determines if two MoneyMarket objects are equal
+     * @param obj the MoneyMarket object that is being compared
+     * @return boolean value of whether two MoneyMarket objects are equal
+     */
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof MoneyMarket))
+            return false;
+
+        return super.equals(obj);
+    }
+
     public void setLoyal(boolean loyal){
         this.isLoyal = loyal;
     }

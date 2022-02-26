@@ -32,6 +32,19 @@ public class CollegeChecking extends Checking {
     }
 
     /**
+     * Method that determines if two CollegeChecking objects are equal
+     * @param obj the CollegeChecking object that is being compared
+     * @return boolean value of whether two CollegeChecking objects are equal
+     */
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof CollegeChecking))
+            return false;
+
+        return super.equals(obj);
+    }
+
+    /**
      * Method to determine monthly interest
      * @return value of monthly interest
      */

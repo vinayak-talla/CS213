@@ -183,9 +183,8 @@ public class BankTeller {
     private int findAccount(Account[] accounts, Account account, int numAccts) {
         for(int i = 0; i < numAccts; i++) {
             if(accounts[i].equals(account)) {
-                if(!((accounts[i].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[i].getType().equals("Checking") && account.getType().equals("College Checking")))) {
+                if(accounts[i].getType().equals(account.getType())) {
                     return i;
-
                 }
             }
         }
@@ -339,13 +338,11 @@ public class BankTeller {
         AccountDatabase accountDatabase = new AccountDatabase();
         while(scanner.hasNextLine()){
             String[] tokens = scanner.nextLine().split("\\s");
-            Account[] tempAccts = accountDatabase.getAccounts();
             int numAccts = accountDatabase.getNumAcct();
             if(tokens[0].equals("O")){
                 findAccountType(tokens, accountDatabase);
             }
             else if(tokens[0].equals("C")){
-                //removeAppointment(schedule, new Appointment(new Patient(tokens[2], tokens[3], new Date(tokens[1])), new Timeslot(new Date(tokens[4]), new Time(tokens[5])), location));
                 closeAccounts(tokens, accountDatabase);
             }
             else if(tokens[0].equals("D")){

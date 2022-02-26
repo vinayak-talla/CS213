@@ -38,6 +38,19 @@ public class Savings extends Account {
     }
 
     /**
+     * Method that determines if two Savings objects are equal
+     * @param obj the Savings object that is being compared
+     * @return boolean value of whether two Savings objects are equal
+     */
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof Savings))
+            return false;
+
+        return super.equals(obj);
+    }
+
+    /**
      * Method to determine monthly interest
      * @return value of monthly interest
      */

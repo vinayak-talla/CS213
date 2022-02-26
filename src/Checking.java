@@ -27,6 +27,19 @@ public class Checking extends Account {
     }
 
     /**
+     * Method that determines if two Checking objects are equal
+     * @param obj the Checking object that is being compared
+     * @return boolean value of whether two Checking objects are equal
+     */
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof Checking))
+            return false;
+
+        return super.equals(obj);
+    }
+
+    /**
      * Method to determine monthly interest
      * @return value of monthly interest
      */

@@ -35,7 +35,12 @@ public class AccountDatabase {
     private int find(Account account){
         for(int i = 0; i < numAcct; i++){
             if(accounts[i].equals(account)){
-                return i;
+                if(accounts[i].getType().equals(account.getType())) {
+                    return i;
+                }
+                if( (accounts[i].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[i].getType().equals("Checking") && account.getType().equals("College Checking"))) {
+                    return i;
+                }
             }
         }
         return NOT_FOUND;
@@ -61,7 +66,6 @@ public class AccountDatabase {
         if(numAcct == accounts.length-1){
             grow();
         }
-        int accIndex = find(account);
         if(find(account) == NOT_FOUND){
             accounts[numAcct] = account;
             numAcct++;
