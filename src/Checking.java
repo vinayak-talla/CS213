@@ -33,7 +33,8 @@ public class Checking extends Account {
      */
     @Override
     public boolean equals(Object obj){
-        if(!(obj instanceof Checking))
+
+        if(!(obj instanceof Checking || obj instanceof CollegeChecking))
             return false;
 
         return super.equals(obj);

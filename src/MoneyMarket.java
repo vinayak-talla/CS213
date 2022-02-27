@@ -32,6 +32,7 @@ public class MoneyMarket extends Savings {
      */
     @Override
     public boolean equals(Object obj){
+
         if(!(obj instanceof MoneyMarket))
             return false;
 

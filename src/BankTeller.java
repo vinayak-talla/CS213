@@ -369,6 +369,7 @@ public class BankTeller {
     }
 
     public static void main(String[] args){
+        System.out.println();
         new BankTeller().run();
     }
 }
