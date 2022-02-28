@@ -73,48 +73,6 @@ public class Date implements Comparable<Date>{
     }
 
     /**
-     * Method that determines if the appt Date entered is more than one year from now
-     * @return boolean value that is whether the appt Date entered is more than one year from now
-     */
-    public boolean isFutureApptDate(){
-        Date todayDate = new Date();
-        int sumOfYears = this.year - todayDate.year;
-        int sumOfMonths = this.month - todayDate.month;
-        int sumOfDays = this.day - todayDate.day;
-        if(sumOfYears == 1){
-            if(sumOfMonths == 0){
-                if(sumOfDays > 0) {
-                    return true;
-                }
-            }
-            else if(sumOfMonths > 0){
-                return true;
-            }
-            else if(sumOfMonths < 0){
-                return false;
-            }
-        }
-        else if(sumOfYears > 1){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Method to figure out if apptDate entered is in the past
-     * @return boolean value that is whether the apptDate entered is in the past
-     */
-    public boolean isPastApptDate(){
-        Date todayDate = new Date();
-        if(compareTo(todayDate) == 0 || compareTo(todayDate) == -1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    /**
      * Method that determines whether the calendar date is a real date
      * @return boolean value that is whether calendar date is valid
      */

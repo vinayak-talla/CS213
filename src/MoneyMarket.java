@@ -6,9 +6,7 @@ import java.text.DecimalFormat;
  * Class that represents a MoneyMarket Account, a type of Account, with a profile, balance
  */
 public class MoneyMarket extends Savings {
-    private double yearlyInterestRate;
     private int numOfWithdrawals;
-    private boolean isLoyal;
 
     /**
      * Constructor for MoneyMarket class
@@ -37,10 +35,6 @@ public class MoneyMarket extends Savings {
             return false;
 
         return super.equals(obj);
-    }
-
-    public void setLoyal(boolean loyal){
-        this.isLoyal = loyal;
     }
 
     public void withdraw(double amount){

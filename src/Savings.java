@@ -6,8 +6,8 @@ import java.text.DecimalFormat;
  * Class that represents a Savings Account, a type of Account, with a profile, balance, and loyalty
  */
 public class Savings extends Account {
-    private double yearlyInterestRate;
-    private boolean isLoyal;
+    protected double yearlyInterestRate;
+    protected boolean isLoyal;
 
     /**
      * Default constructor for Savings class
@@ -86,10 +86,6 @@ public class Savings extends Account {
         if(closed) {
             isLoyal = false;
         }
-    }
-
-    public boolean getLoyalty() {
-       return this.isLoyal;
     }
 
     /**
