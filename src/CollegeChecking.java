@@ -6,7 +6,6 @@ import java.text.DecimalFormat;
  * Class that represents a CollegeChecking Account, a type of Account, with a profile, balance, and campus code
  */
 public class CollegeChecking extends Checking {
-    private static final double YEARLYINTERESTRATE = 0.0025;
     private String campusCode;
 
     /**
@@ -20,6 +19,7 @@ public class CollegeChecking extends Checking {
         this.holder = profile;
         this.balance = balance;
         this.closed = false;
+        this.yearlyInterestRate = 0.0025;
         if(campusCode == 0){
             this.campusCode = "NEW_BRUNSWICK";
         }
@@ -51,7 +51,7 @@ public class CollegeChecking extends Checking {
      */
     public double monthlyInterest() {
         DecimalFormat d = new DecimalFormat("#.##");
-        return Double.parseDouble(d.format((YEARLYINTERESTRATE/12) * balance));
+        return Double.parseDouble(d.format((this.yearlyInterestRate/12) * balance));
     }
 
     /**
