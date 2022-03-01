@@ -1,3 +1,4 @@
+package project2;
 
 /**
  *
@@ -26,11 +27,18 @@ public class Profile {
      * Method to print out a Profile object
      * @return Profile object formatted as a String
      */
+    @Override
     public String toString(){
         return this.fname + " " + this.lname + " " + this.dob.toString();
     }
 
-    public boolean equals(Profile profile){ // test this method
+    /**
+     * Method to check if two Profile objects are equal
+     * @param profile Profile object that is being checked
+     * @return boolean of whether the objects are equal or not
+     */
+    public boolean equals(Profile profile){
+
         if(this.fname.toLowerCase().equals(profile.fname.toLowerCase())){
             if(this.lname.toLowerCase().equals(profile.lname.toLowerCase())){
                 if(this.dob.compareTo(profile.dob) == 0){

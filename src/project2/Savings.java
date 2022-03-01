@@ -1,3 +1,5 @@
+package project2;
+
 import java.text.DecimalFormat;
 /**
  *
@@ -81,11 +83,13 @@ public class Savings extends Account {
         return "Savings";
     }
 
+    /**
+     * Setter method for closed
+     * @param closed, boolean value of whether an account is closed or not
+     */
     public void setClosed(boolean closed) {
         this.closed = closed;
-        if(closed) {
-            isLoyal = false;
-        }
+        this.isLoyal = false;
     }
 
     /**
@@ -107,12 +111,5 @@ public class Savings extends Account {
         }
     }
 
-    public static void main(String[] args){
-        Savings savings1 = new Savings(new Profile("Jane", "Doe", new Date("6/07/2002")), 0.0, 1);
-        Savings savings2 = new Savings(new Profile("Alvin", "Alex", new Date("7/06/2002")), 100.0, 0);
-        System.out.println(savings1);
-        System.out.println(savings2);
-
-    }
 }
 

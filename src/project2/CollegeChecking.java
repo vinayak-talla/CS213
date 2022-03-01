@@ -1,3 +1,5 @@
+package project2;
+
 import java.text.DecimalFormat;
 /**
  *
@@ -83,11 +85,4 @@ public class CollegeChecking extends Checking {
         return "College Checking";
     }
 
-    public static void main(String[] args){
-        CollegeChecking checking1 = new CollegeChecking(new Profile("Jane", "Doe", new Date("6/07/2002")), 0.0, 1);
-        CollegeChecking checking2 = new CollegeChecking(new Profile("Alvin", "Alex", new Date("7/06/2002")), 100.0, 0);
-        System.out.println(checking1);
-        System.out.println(checking2);
-
-    }
 }

@@ -1,3 +1,6 @@
+package project2;
+
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -60,7 +63,7 @@ public class BankTeller {
                 openAccount(accountDatabase,moneyMarket1);
             }
         }
-        catch (IndexOutOfBoundsException ex) {
+        catch (IndexOutOfBoundsException | NoSuchElementException ex) {
             System.out.println("Missing data for opening an account.");
         }
         catch (NumberFormatException ex) {
@@ -131,6 +134,20 @@ public class BankTeller {
         return true;
     }
 
+    /**
+     * Private helper method to check why account can't be closed
+     * @param accounts the array of accounts
+     * @param account the account that can't be closed
+     * @param numAcct the number of accounts in the array
+     */
+    private void checkCloseAccount(Account[] accounts, Account account, int numAcct) {
+        if(findAccount(accounts,account,numAcct) == -1) {
+            System.out.println("Account is not in database");
+        }
+        else {
+            System.out.println("Account is closed already.");
+        }
+    }
 
     /**
      * Private helper method to close an account
@@ -143,29 +160,29 @@ public class BankTeller {
                 if (accountDatabase.close(new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0))) {
                     System.out.println("Account closed.");
                 } else {
-                    System.out.println("Account is closed already.");
+                    checkCloseAccount(accountDatabase.getAccounts(), new Checking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0),accountDatabase.getNumAcct());
                 }
             } else if (tokens[1].equals("CC")) {
                 if (accountDatabase.close(new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0, 0))) {
                     System.out.println("Account closed.");
                 } else {
-                    System.out.println("Account is closed already.");
+                    checkCloseAccount(accountDatabase.getAccounts(), new CollegeChecking(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0, 0),accountDatabase.getNumAcct());
                 }
             } else if (tokens[1].equals("S")) {
                 if (accountDatabase.close(new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0, 0))) {
                     System.out.println("Account closed.");
                 } else {
-                    System.out.println("Account is closed already.");
+                    checkCloseAccount(accountDatabase.getAccounts(), new Savings(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0, 0),accountDatabase.getNumAcct());
                 }
             } else if (tokens[1].equals("MM")) {
                 if (accountDatabase.close(new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0)))
                     System.out.println("Account closed.");
                 else {
-                    System.out.println("Account is closed already.");
+                    checkCloseAccount(accountDatabase.getAccounts(), new MoneyMarket(new Profile(tokens[2], tokens[3], new Date(tokens[4])), 0),accountDatabase.getNumAcct());
                 }
             }
         }
-        catch (IndexOutOfBoundsException ex) {
+        catch (IndexOutOfBoundsException | NoSuchElementException ex) {
             System.out.println("Missing data for closing an account.");
         }
         catch (NumberFormatException ex) {
@@ -232,7 +249,7 @@ public class BankTeller {
             }
         }
 
-        catch (IndexOutOfBoundsException ex) {
+        catch (IndexOutOfBoundsException | NoSuchElementException ex) {
             System.out.println("Missing data for depositing into account.");
         }
         catch (NumberFormatException ex) {
@@ -294,7 +311,7 @@ public class BankTeller {
             }
 
         }
-        catch (IndexOutOfBoundsException ex) {
+        catch (IndexOutOfBoundsException | NoSuchElementException ex) {
             System.out.println("Missing data for withdrawing from account.");
         }
         catch (NumberFormatException ex) {
@@ -368,9 +385,5 @@ public class BankTeller {
         System.out.println("Bank Teller is terminated.");
     }
 
-    public static void main(String[] args){
-        System.out.println();
-        new BankTeller().run();
-    }
 }
 

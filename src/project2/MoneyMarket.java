@@ -1,3 +1,5 @@
+package project2;
+
 import java.text.DecimalFormat;
 /**
  *
@@ -37,6 +39,10 @@ public class MoneyMarket extends Savings {
         return super.equals(obj);
     }
 
+    /**
+     * Method to withdraw money from MoneyMarket account
+     * @param amount, the amount of money to withdraw
+     */
     public void withdraw(double amount){
         this.balance = this.balance - amount;
         if(this.balance < 2500.0){
@@ -68,6 +74,10 @@ public class MoneyMarket extends Savings {
         }
     }
 
+    /**
+     * Setter method for closed
+     * @param closed, boolean value of whether an account is closed or not
+     */
     public void setClosed(boolean closed) {
         this.closed = closed;
 
@@ -105,12 +115,4 @@ public class MoneyMarket extends Savings {
         return getType() + "::" + holder + "::Balance " + d.format(balance) + loyal + closedString + "::withdrawl: " + (numOfWithdrawals);
     }
 
-    public static void main(String[] args){
-        MoneyMarket moneyMarket1 = new MoneyMarket(new Profile("Jane", "Doe", new Date("6/07/2002")), 2500.0);
-        MoneyMarket moneyMarket2 = new MoneyMarket(new Profile("Alvin", "Alex", new Date("7/06/2002")), 2500.0);
-        System.out.println(moneyMarket1);
-        System.out.println(moneyMarket2);
-        moneyMarket2.withdraw(200);
-        System.out.println(moneyMarket2);
-    }
 }

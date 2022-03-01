@@ -1,3 +1,5 @@
+package project2;
+
 import java.text.DecimalFormat;
 /**
  *
@@ -55,7 +57,7 @@ public abstract class Account {
 
     /**
      * Method to print out Account object
-     * @return Account object formatted as String
+     * @return .Account object formatted as String
      */
     @Override
     public String toString(){
@@ -97,7 +99,7 @@ public abstract class Account {
 
     /**
      * Abstract method for subclasses to determine type of Account
-     * @return type of Account as String
+     * @return type of .Account as String
      */
     public abstract String getType();
 

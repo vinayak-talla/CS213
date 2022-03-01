@@ -1,3 +1,5 @@
+package project2;
+
 import java.text.DecimalFormat;
 /**
  *
@@ -19,10 +21,18 @@ public class AccountDatabase {
         this.numAcct = 0;
     }
 
+    /**
+     * Getter method for accounts
+     * @return the array of Accounts
+     */
     public Account[] getAccounts() {
         return accounts;
     }
 
+    /**
+     * Getter method for number of Accounts
+     * @return the number of accounts in the array
+     */
     public int getNumAcct(){
         return numAcct;
     }
@@ -83,7 +93,6 @@ public class AccountDatabase {
             if(accounts[find(account)].getType().equals("College Checking")){
                 accounts[find(account)] = account;
             }
-
             return false;
         }
     }
@@ -99,6 +108,10 @@ public class AccountDatabase {
         if(find(account) == -1) {return false;}
 
         if(accounts[indexOfAccount].getClosed()) {
+            return false;
+        }
+
+        if((accounts[find(account)].getType().equals("College Checking") && account.getType().equals("Checking")) || (accounts[find(account)].getType().equals("Checking") && account.getType().equals("College Checking"))){
             return false;
         }
         accounts[indexOfAccount].setClosed(true);
@@ -206,24 +219,8 @@ public class AccountDatabase {
         System.out.println();
     }
 
-    public static void main(String[] args){
-        AccountDatabase accountDB = new AccountDatabase();
-        accountDB.open(new Savings(new Profile("Leonard", "Fuller", new Date("1/15/1987")), 450, 1));
-        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 950));
-        accountDB.open(new Checking(new Profile("John", "Doe", new Date("2/19/1990")), 1766));
-        accountDB.open(new MoneyMarket(new Profile("Jane", "Martin", new Date("1/15/1987")), 450));
-        accountDB.open(new CollegeChecking(new Profile("John", "Doe", new Date("2/19/1989")), 500.0, 0));
-        accountDB.open(new CollegeChecking(new Profile("Chris", "Young", new Date("9/20/2001")), 500, 0));
 
-        accountDB.printByAccountType();
-//        accountDB.printFeeAndInterest();
-//        accountDB.updateFeesAndInterest();
-//        accountDB.close(new Checking(new Profile("April", "March", new Date("1/15/1987")), 0));
-//        accountDB.print();
-//        accountDB.open(new Checking(new Profile("April", "March", new Date("1/15/1987")), 300));
-//        accountDB.open(new CollegeChecking(new Profile("April", "March", new Date("1/15/1987")), 490, 0));
-        //accountDB.print();
 
-    }
+
 
 }

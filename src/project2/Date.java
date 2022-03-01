@@ -1,3 +1,5 @@
+package project2;
+
 import java.util.StringTokenizer;
 import java.util.Calendar;
 
@@ -147,61 +149,4 @@ public class Date implements Comparable<Date>{
         return this.month + "/" + this.day + "/" + this.year;
     }
 
-    public static void main(String[] args){
-
-        // Test 1
-        Date date1 = new Date("13/07/2021");
-
-        // Test 2
-        Date date2 = new Date("-1/07/2021");
-
-        // Test 3
-        Date date3 = new Date("12/32/2021");
-
-        // Test 4
-        Date date4 = new Date("12/0/2022");
-
-        // Test 5
-        Date date5 = new Date("12/07/2020");
-
-        // Test 6
-        Date date6 = new Date("12/07/202232");
-
-        // Test 7
-        Date date7 = new Date("12/07/0");
-
-        // Test 8
-        Date date8 = new Date("0/07/2021");
-
-        // Test 9
-        Date date9 = new Date("2/29/2011");
-
-        // Test 10
-        Date date10 = new Date("2/29/2012");
-
-        // Test 11
-        Date date11 = new Date("3/31/2019");
-
-        // Test 12
-        Date date12 = new Date("4/31/2019");
-
-        // Test 13
-        Date date13 = new Date("2/28/2011");
-
-        System.out.println(date1.isValid());
-        System.out.println(date2.isValid());
-        System.out.println(date3.isValid());
-        System.out.println(date4.isValid());
-        System.out.println(date5.isValid());
-        System.out.println(date6.isValid());
-        System.out.println(date7.isValid());
-        System.out.println(date8.isValid());
-        System.out.println(date9.isValid());
-        System.out.println(date10.isValid());
-        System.out.println(date11.isValid());
-        System.out.println(date12.isValid());
-        System.out.println(date13.isValid());
-
-
-    }
 }
