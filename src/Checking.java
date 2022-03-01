@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
  * Class that represents a Checking Account, a type of Account, with a profile, and balance
  */
 public class Checking extends Account {
-    private static final double YEARLYINTERESTRATE = 0.001;
+    protected double yearlyInterestRate;
 
     /**
      * Default constructor for Checking class
@@ -24,6 +24,7 @@ public class Checking extends Account {
         this.holder = profile;
         this.balance = balance;
         this.closed = false;
+        this.yearlyInterestRate = 0.001;
     }
 
     /**
@@ -46,7 +47,7 @@ public class Checking extends Account {
      */
     public double monthlyInterest() {
         DecimalFormat d = new DecimalFormat("#.##");
-        return Double.parseDouble(d.format((YEARLYINTERESTRATE/12) * balance));
+        return Double.parseDouble(d.format((this.yearlyInterestRate/12) * balance));
     }
 
     /**
