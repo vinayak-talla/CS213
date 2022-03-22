@@ -10,6 +10,11 @@ import java.text.DecimalFormat;
 public class Savings extends Account {
     protected double yearlyInterestRate;
     protected boolean isLoyal;
+    private static final double NONLOYALINTERESTRATE = .003;
+    private static final double LOYALINTERESTRATE = .0045;
+    private static final double MINIMUMBALANCE = 300;
+    private static final double SAVINGSFEE = 6;
+
 
     /**
      * Default constructor for Savings class
@@ -31,11 +36,11 @@ public class Savings extends Account {
         this.closed = false;
         if(customerLoyalty == 0) {
             isLoyal = false;
-            yearlyInterestRate = .003;
+            yearlyInterestRate = NONLOYALINTERESTRATE;
         }
         else {
             isLoyal = true;
-            yearlyInterestRate = 0.0045;
+            yearlyInterestRate = LOYALINTERESTRATE;
         }
     }
 
@@ -67,11 +72,11 @@ public class Savings extends Account {
      * @return value of monthly fees
      */
     public double fee() {
-        if(balance >= 300) {
+        if(balance >= MINIMUMBALANCE) {
             return 0;
         }
         else{
-            return 6;
+            return SAVINGSFEE;
         }
     }
 
